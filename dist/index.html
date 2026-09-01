@@ -20,11 +20,7 @@
   <meta property="og:locale:alternate" content="pl_PL">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Stankiewicz Design", "description": "Author-led interior design and 3D visualization studio. Atmospheric, mood-led spaces built on light, material, proportion and cinematic composition. Nijmegen, working internationally.", "url": "https://stankiewicz.design", "email": "d.stankiewicz.design@gmail.com", "image": "https://stankiewicz.design/images/og.jpg", "areaServed": "Worldwide", "address": {"@type": "PostalAddress", "addressLocality": "Nijmegen", "addressCountry": "NL"}, "knowsLanguage": ["en", "pl", "nl"], "sameAs": ["https://www.instagram.com/stankiewiczdesign", "https://www.facebook.com/profile.php?id=61581186960442", "https://www.tiktok.com/@stankiewiczdesign", "https://www.pinterest.com/StankiewiczDesign/"]}</script>
-</head>
-<body>
-<title>Stankiewicz Design — Interior design &amp; 3D visualization</title>
-
-<style>
+  <style>
   :root{
     --ink:#0A0A0B; --ink-2:#131316; --ink-3:#191A1D;
     --paper:#EDEAE4; --concrete:#8B8882; --steel:#B4B6B8; --cobalt:#1B34C4;
@@ -293,7 +289,8 @@
     .proj .more{opacity:1;transform:none}
   }
 </style>
-
+</head>
+<body>
 <nav class="nav" id="nav">
   <a class="brand" href="#top">Stankiewicz Design</a>
   <div class="navlinks">
@@ -513,7 +510,7 @@ var SLIDE_MS = 5000;
 var TRYB = "pages";
 
 var MAIL  = "d.stankiewicz.design@gmail.com";
-var PHONE = "";              // ← wpisz numer w formacie +31612345678, wtedy przycisk się pojawi
+var PHONE = "+31 6 39 28 36 66";              // ← wpisz numer w formacie +31612345678, wtedy przycisk się pojawi
 var SOCIAL = [
   {n:"Instagram", u:"https://www.instagram.com/stankiewiczdesign",
    d:"M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.67.8.9 1.4.16.4.36 1 .41 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.41 2.2-.23.6-.5 1-.9 1.4-.4.4-.8.68-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.5-1.4-.9-.4-.4-.68-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.5-1 .9-1.4.4-.42.8-.68 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 3.24A6.56 6.56 0 1 0 18.56 12 6.56 6.56 0 0 0 12 5.44zm0 10.82A4.26 4.26 0 1 1 16.26 12 4.26 4.26 0 0 1 12 16.26zm6.82-10.96a1.53 1.53 0 1 1-1.53-1.53 1.53 1.53 0 0 1 1.53 1.53z"},
@@ -847,6 +844,7 @@ var I18N = {
 
   var grid = document.getElementById("projGrid");
   function paintProjects(){
+    if(!grid) return;
     grid.innerHTML = PROJEKTY.map(function(p){
       var t = p[lang];
       var href = TRYB === "pages" ? "/portfolio/"+p.slug+"/" : "#/portfolio/"+p.slug;
@@ -905,13 +903,16 @@ var I18N = {
   }
 
   function pokazProjekt(slug){
-    if(!paintProject(slug)) return false;
-    homeBox.hidden = true; projBox.hidden = false;
+    if(!projBox || !paintProject(slug)) return false;
+    if(homeBox) homeBox.hidden = true;
+    projBox.hidden = false;
     scrollTo(0,0); clearInterval(timer);
     return true;
   }
   function pokazHome(hash){
-    projBox.hidden = true; homeBox.hidden = false;
+    if(!homeBox) return;
+    if(projBox) projBox.hidden = true;
+    homeBox.hidden = false;
     document.title = "Stankiewicz Design — Interior design & 3D visualization";
     restart();
     if(hash){ var el = document.querySelector(hash); if(el) el.scrollIntoView(); }
@@ -924,8 +925,10 @@ var I18N = {
     if(m && pokazProjekt(m[1])) return;
     pokazHome(location.hash && location.hash.indexOf("portfolio") < 0 ? location.hash : "");
   }
-  addEventListener("popstate", trasa);
-  addEventListener("hashchange", trasa);
+  if(TRYB !== "pages"){
+    addEventListener("popstate", trasa);
+    addEventListener("hashchange", trasa);
+  }
 
   document.addEventListener("click", function(e){
     var a = e.target.closest ? e.target.closest("a") : null;
@@ -948,11 +951,12 @@ var I18N = {
     } else {
       h += '<span class="btn todo">'+T["way.teltodo"]+'</span>';
     }
-    document.getElementById("ways").innerHTML = h;
+    var wbox = document.getElementById("ways"); if(wbox) wbox.innerHTML = h;
   }
 
   function paintTypes(){
     var T = I18N[lang], s = document.getElementById("ptype");
+    if(!s) return;
     s.innerHTML = ["pt1","pt2","pt3","pt4","pt5"].map(function(k){
       return '<option>'+T[k]+'</option>'; }).join("");
   }
@@ -997,6 +1001,7 @@ var I18N = {
   var dotsBox = document.getElementById("dots");
   var slideEls = [], dotEls = [], cur = 0, timer = null;
 
+  if(slidesBox && dotsBox){
   slidesBox.innerHTML = SLIDES.map(function(s,i){
     return '<div class="slide'+(i===0?" on":"")+'" style="--ox:'+s.ox+';--oy:'+s.oy+'">'
          + '<img src="'+IMG[s.k]+'" alt="" '+(i>0?'loading="lazy"':'')+'></div>';
@@ -1024,6 +1029,7 @@ var I18N = {
   dotEls.forEach(function(d){
     d.addEventListener("click", function(){ goSlide(+d.dataset.s, true); });
   });
+  }
   /* karta w tle nie pali baterii */
   document.addEventListener("visibilitychange", function(){
     if(document.hidden) clearInterval(timer); else restart();
@@ -1053,7 +1059,7 @@ var I18N = {
   var last = -1, ticking = false;
   function apply(){
     ticking = false; navState();
-    if(mqR.matches || !tour) return;
+    if(mqR.matches || !tour || !fill) return;
     var r = tour.getBoundingClientRect(), total = r.height - innerHeight;
     if(total <= 0) return;
     var p = Math.min(1, Math.max(0, -r.top / total));
@@ -1070,7 +1076,7 @@ var I18N = {
 
   /* formularz */
   var form = document.getElementById("brief"), sent = document.getElementById("sent");
-  form.addEventListener("submit", function(e){
+  if(form) form.addEventListener("submit", function(e){
     e.preventDefault();
     var d = new FormData(form);
     if(!d.get("imie") || !d.get("mail")){ sent.textContent = I18N[lang]["f.err"]; return; }
@@ -1079,7 +1085,8 @@ var I18N = {
     sent.textContent = I18N[lang]["f.ok"];
   });
 
-  setLang(lang); apply(); restart(); trasa();
+  setLang(lang); apply(); restart();
+  if(TRYB !== "pages") trasa();
 })();
 </script>
 

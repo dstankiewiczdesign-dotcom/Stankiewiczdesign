@@ -823,6 +823,7 @@ var I18N = {
 
   var grid = document.getElementById("projGrid");
   function paintProjects(){
+    if(!grid) return;
     grid.innerHTML = PROJEKTY.map(function(p){
       var t = p[lang];
       var href = TRYB === "pages" ? "/portfolio/"+p.slug+"/" : "#/portfolio/"+p.slug;
@@ -881,13 +882,16 @@ var I18N = {
   }
 
   function pokazProjekt(slug){
-    if(!paintProject(slug)) return false;
-    homeBox.hidden = true; projBox.hidden = false;
+    if(!projBox || !paintProject(slug)) return false;
+    if(homeBox) homeBox.hidden = true;
+    projBox.hidden = false;
     scrollTo(0,0); clearInterval(timer);
     return true;
   }
   function pokazHome(hash){
-    projBox.hidden = true; homeBox.hidden = false;
+    if(!homeBox) return;
+    if(projBox) projBox.hidden = true;
+    homeBox.hidden = false;
     document.title = "Stankiewicz Design — Interior design & 3D visualization";
     restart();
     if(hash){ var el = document.querySelector(hash); if(el) el.scrollIntoView(); }
@@ -900,8 +904,10 @@ var I18N = {
     if(m && pokazProjekt(m[1])) return;
     pokazHome(location.hash && location.hash.indexOf("portfolio") < 0 ? location.hash : "");
   }
-  addEventListener("popstate", trasa);
-  addEventListener("hashchange", trasa);
+  if(TRYB !== "pages"){
+    addEventListener("popstate", trasa);
+    addEventListener("hashchange", trasa);
+  }
 
   document.addEventListener("click", function(e){
     var a = e.target.closest ? e.target.closest("a") : null;
@@ -924,11 +930,12 @@ var I18N = {
     } else {
       h += '<span class="btn todo">'+T["way.teltodo"]+'</span>';
     }
-    document.getElementById("ways").innerHTML = h;
+    var wbox = document.getElementById("ways"); if(wbox) wbox.innerHTML = h;
   }
 
   function paintTypes(){
     var T = I18N[lang], s = document.getElementById("ptype");
+    if(!s) return;
     s.innerHTML = ["pt1","pt2","pt3","pt4","pt5"].map(function(k){
       return '<option>'+T[k]+'</option>'; }).join("");
   }
@@ -973,6 +980,7 @@ var I18N = {
   var dotsBox = document.getElementById("dots");
   var slideEls = [], dotEls = [], cur = 0, timer = null;
 
+  if(slidesBox && dotsBox){
   slidesBox.innerHTML = SLIDES.map(function(s,i){
     return '<div class="slide'+(i===0?" on":"")+'" style="--ox:'+s.ox+';--oy:'+s.oy+'">'
          + '<img src="'+IMG[s.k]+'" alt="" '+(i>0?'loading="lazy"':'')+'></div>';
@@ -1000,6 +1008,7 @@ var I18N = {
   dotEls.forEach(function(d){
     d.addEventListener("click", function(){ goSlide(+d.dataset.s, true); });
   });
+  }
   /* karta w tle nie pali baterii */
   document.addEventListener("visibilitychange", function(){
     if(document.hidden) clearInterval(timer); else restart();
@@ -1029,7 +1038,7 @@ var I18N = {
   var last = -1, ticking = false;
   function apply(){
     ticking = false; navState();
-    if(mqR.matches || !tour) return;
+    if(mqR.matches || !tour || !fill) return;
     var r = tour.getBoundingClientRect(), total = r.height - innerHeight;
     if(total <= 0) return;
     var p = Math.min(1, Math.max(0, -r.top / total));
@@ -1046,7 +1055,7 @@ var I18N = {
 
   /* formularz */
   var form = document.getElementById("brief"), sent = document.getElementById("sent");
-  form.addEventListener("submit", function(e){
+  if(form) form.addEventListener("submit", function(e){
     e.preventDefault();
     var d = new FormData(form);
     if(!d.get("imie") || !d.get("mail")){ sent.textContent = I18N[lang]["f.err"]; return; }
@@ -1055,6 +1064,7 @@ var I18N = {
     sent.textContent = I18N[lang]["f.ok"];
   });
 
-  setLang(lang); apply(); restart(); trasa();
+  setLang(lang); apply(); restart();
+  if(TRYB !== "pages") trasa();
 })();
 </script>

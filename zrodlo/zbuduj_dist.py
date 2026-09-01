@@ -88,6 +88,17 @@ for p in PROJEKTY:
 
 # ── rejestr base64 → ścieżki ──────────────────────────────────────
 szablon = szablon.replace('var TRYB = "hash";', 'var TRYB = "pages";')
+
+# Szablon powstał jako fragment do podglądu: zaczyna się własnym <title> i ma <style>
+# w treści. W pełnym dokumencie tytuł musi być jeden, a style w <head>.
+_t = re.search(r"<title>.*?</title>\s*", szablon, re.S)
+if _t:
+    szablon = szablon[:_t.start()] + szablon[_t.end():]
+_s = re.search(r"<style>.*?</style>\s*", szablon, re.S)
+STYLE = ""
+if _s:
+    STYLE = "  " + _s.group(0).strip() + "\n"
+    szablon = szablon[:_s.start()] + szablon[_s.end():]
 tresc = re.sub(r"var IMG = \{.*?\n\};",
                "var IMG = " + json.dumps(SCIEZKI, ensure_ascii=False, indent=1) + ";",
                szablon, flags=re.S)
@@ -122,7 +133,7 @@ def head(tytul, opis, url, obraz):
   <meta property="og:locale:alternate" content="pl_PL">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{ld}</script>
-</head>
+{STYLE}</head>
 <body>
 """
 
@@ -162,7 +173,11 @@ io.open(f"{DIST}/index.html", "w", encoding="utf8").write(
 # ── podstrony projektów ───────────────────────────────────────────
 for p in PROJEKTY:
     s = p["slug"]; t = p["en"]
-    ciało = tresc.replace('<div id="home">', '<div id="home" hidden>', 1)
+    # Blok strony głównej znika z podstrony w całości — inaczej zostaje w kodzie
+    # drugi <h1> z hasłem marki i Google widzi go przed nazwą projektu.
+    _i = tresc.index('<div id="home">')
+    _j = tresc.index('<div id="project" hidden></div>')
+    ciało = tresc[:_i] + tresc[_j:]
     ciało = ciało.replace('<div id="project" hidden></div>',
                           '<div id="project">' + projekt_html(p) + "</div>", 1)
     os.makedirs(f"{DIST}/portfolio/{s}", exist_ok=True)
