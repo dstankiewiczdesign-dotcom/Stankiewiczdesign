@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dstankiewiczdesign-dotcom.github.io/Stankiewiczdesign/sitemap.xml
