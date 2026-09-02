@@ -271,7 +271,7 @@
 </style>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="#top">Stankiewicz Design</a>
+  <a class="brand" href="#top" id="brandLink">Stankiewicz Design</a>
   <div class="navlinks">
     <a href="#portfolio" data-t="nav.portfolio">Portfolio</a>
     <a href="#process" data-t="nav.process">Process</a>
@@ -808,7 +808,11 @@ var I18N = {
 /* ══════════ LOGIKA ══════════ */
 (function(){
   var lang = "en";
-  try{ var z = localStorage.getItem("sd-lang"); if(z==="pl"||z==="en") lang=z; }catch(e){}
+  if(TRYB === "pages"){
+    lang = /^\/pl(\/|$)/.test(location.pathname) ? "pl" : "en";
+  } else {
+    try{ var z = localStorage.getItem("sd-lang"); if(z==="pl"||z==="en") lang=z; }catch(e){}
+  }
 
   function icon(p){
     return '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="'+p+'"/></svg>';
@@ -826,7 +830,8 @@ var I18N = {
     if(!grid) return;
     grid.innerHTML = PROJEKTY.map(function(p){
       var t = p[lang];
-      var href = TRYB === "pages" ? "/portfolio/"+p.slug+"/" : "#/portfolio/"+p.slug;
+      var pref = (TRYB === "pages" && lang === "pl") ? "/pl" : "";
+      var href = TRYB === "pages" ? pref+"/portfolio/"+p.slug+"/" : "#/portfolio/"+p.slug;
       return '<a class="proj" href="'+href+'"'+(TRYB==="pages"?"":' data-go="'+p.slug+'"')+'>'
         + '<span class="shot"><img src="'+IMG[p.slug+"-01"]+'" alt="'+t.n+' — '+t.k+'" loading="lazy"></span>'
         + '<span class="body"><span class="top"><b>'+t.n+'</b><span class="kind">'+t.k+'</span></span>'
@@ -873,8 +878,8 @@ var I18N = {
       +   '<p class="eyebrow" style="margin-bottom:24px">'+T["p.moodboard"]+'</p>'
       +   '<div class="mood-shot"><img src="'+IMG[p.slug+"-mood"]+'" alt="'+t.n+' — '+T["p.moodboard"]+'" loading="lazy"></div>'
       +   '<div class="pnav" style="margin-top:36px">'
-      +     '<a class="btn" href="'+(TRYB==="pages"?"/#portfolio":"#portfolio")+'" data-back="1">&larr; '+T["p.back"]+'</a>'
-      +     '<a class="btn solid" href="'+(TRYB==="pages"?"/#contact":"#contact")+'" data-back="1">'+T["p.start"]+'</a>'
+      +     '<a class="btn" href="'+(TRYB==="pages"?(lang==="pl"?"/pl/":"/")+"#portfolio":"#portfolio")+'" data-back="1">&larr; '+T["p.back"]+'</a>'
+      +     '<a class="btn solid" href="'+(TRYB==="pages"?(lang==="pl"?"/pl/":"/")+"#contact":"#contact")+'" data-back="1">'+T["p.start"]+'</a>'
       +   '</div>'
       + '</div></section>';
     document.title = t.n + " — Stankiewicz Design";
@@ -964,8 +969,20 @@ var I18N = {
     slideEls.forEach(function(el,i){ el.querySelector('img').alt = SLIDES[i][l] || ''; });
     if(!projBox.hidden){ var m=(location.pathname+location.hash).match(/portfolio\/([a-z0-9-]+)/); if(m) paintProject(m[1]); }
   }
+  /* Adres bliźniaczy w drugim języku. EN siedzi w katalogu głównym, PL w /pl/. */
+  function adresJezyka(l){
+    var p = location.pathname.replace(/^\/pl(\/|$)/, "/");
+    return l === "pl" ? ("/pl" + (p === "/" ? "/" : p)) : p;
+  }
   document.querySelectorAll(".lang button").forEach(function(b){
-    b.addEventListener("click", function(){ setLang(b.dataset.l); });
+    b.addEventListener("click", function(){
+      if(TRYB === "pages"){
+        try{ localStorage.setItem("sd-lang", b.dataset.l); }catch(e){}
+        location.href = adresJezyka(b.dataset.l) + location.hash;
+      } else {
+        setLang(b.dataset.l);
+      }
+    });
   });
 
   var mqR = matchMedia("(prefers-reduced-motion: reduce)");
@@ -1064,6 +1081,14 @@ var I18N = {
     sent.textContent = I18N[lang]["f.ok"];
   });
 
+  if(TRYB === "pages"){
+    var bl = document.getElementById("brandLink");
+    if(bl) bl.setAttribute("href", lang === "pl" ? "/pl/" : "/");
+    document.querySelectorAll(".navlinks a,.menu a").forEach(function(a){
+      var h = a.getAttribute("href");
+      if(h && h.charAt(0) === "#") a.setAttribute("href", (lang === "pl" ? "/pl/" : "/") + h);
+    });
+  }
   setLang(lang); apply(); restart();
   if(TRYB !== "pages") trasa();
 })();

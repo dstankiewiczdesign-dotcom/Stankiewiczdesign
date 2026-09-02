@@ -1,27 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://stankiewicz.design/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://stankiewicz.design/portfolio/apartment-01/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/apartment-01/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/apartment-01/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/apartment-01/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stankiewicz.design/portfolio/blue-kitchen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/blue-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/blue-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/blue-kitchen/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stankiewicz.design/portfolio/marble-kitchen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/marble-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/marble-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/marble-kitchen/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://stankiewicz.design/portfolio/marble-bathroom/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/marble-bathroom/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/marble-bathroom/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/marble-bathroom/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stankiewicz.design/pl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://stankiewicz.design/pl/portfolio/apartment-01/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/apartment-01/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/apartment-01/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/apartment-01/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stankiewicz.design/pl/portfolio/blue-kitchen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/blue-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/blue-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/blue-kitchen/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stankiewicz.design/pl/portfolio/marble-kitchen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/marble-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/marble-kitchen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/marble-kitchen/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stankiewicz.design/pl/portfolio/marble-bathroom/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stankiewicz.design/portfolio/marble-bathroom/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/portfolio/marble-bathroom/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/portfolio/marble-bathroom/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
