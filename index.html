@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Stankiewicz Design — interior design &amp; 3D visualization</title>
+<title>Interior Design &amp; 3D Visualization Nijmegen | Stankiewicz Design</title>
 <meta name="description" content="Before it’s built, it’s felt. Interior design &amp; 3D visualization studio. Light, material, proportion, silence.">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="canonical" href="https://stankiewicz.design/">
@@ -216,7 +216,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 .gallery img.wide{grid-column:1/-1;aspect-ratio:auto}
 @media (max-width:600px){.meta,.gallery{grid-template-columns:1fr}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stankiewicz Design","url":"https://stankiewicz.design/","logo":"https://stankiewicz.design/icon-192.png","email":"studio@stankiewicz.design","telephone":"+31639283666","sameAs":["https://www.instagram.com/stankiewiczdesign","https://www.pinterest.com/StankiewiczDesign/","https://www.tiktok.com/@stankiewiczdesign"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stankiewicz Design","url":"https://stankiewicz.design/","logo":"https://stankiewicz.design/icon-192.png","email":"studio@stankiewicz.design","telephone":"+31639283666","address":{"@type":"PostalAddress","addressLocality":"Nijmegen","addressCountry":"NL"},"founder":{"@type":"Person","name":"Damian Stankiewicz"},"sameAs":["https://www.instagram.com/stankiewiczdesign","https://www.pinterest.com/StankiewiczDesign/","https://www.tiktok.com/@stankiewiczdesign"]}</script>
 </head>
 <body>
 <div class="intro" id="intro" aria-hidden="true">
@@ -276,7 +276,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 
 <header class="hero" id="top">
   <div class="slides" id="slides">
-    <img class="on" src="images/hero-01.jpg" width="1402" height="1122" alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle">
+    <img class="on" src="images/hero-01.jpg" width="1402" height="1122" fetchpriority="high" alt="Apartment interior with concrete and a black volume in directional light" data-alt-en="Apartment interior with concrete and a black volume in directional light" data-alt-pl="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle">
   </div>
   <div class="wrap">
     <p class="label" data-i="hero_label">Projektowanie wnętrz · Wizualizacje 3D · Nijmegen</p>
@@ -352,7 +352,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 
 <section id="o-mnie">
   <div class="wrap about">
-    <img class="portrait" src="images/portrait.jpg" width="1000" height="1250" alt="Damian Stankiewicz, projektant wnętrz" loading="lazy">
+    <img class="portrait" src="images/portrait.jpg" width="1000" height="1250" alt="Damian Stankiewicz, interior designer" data-alt-en="Damian Stankiewicz, interior designer" data-alt-pl="Damian Stankiewicz, projektant wnętrz" loading="lazy">
     <div>
       <p class="label" data-i="ab_label">O mnie</p>
       <h2 data-i="ab_title">Autorskie studio, nie agencja.</h2>
@@ -449,6 +449,7 @@ let lang="en";try{lang=localStorage.getItem("sd-lang2")||"en"}catch(e){}
 const grid=document.getElementById("grid"),dlg=document.getElementById("dlg"),body=document.getElementById("dlg-body");
 function render(){
   document.documentElement.lang=lang;
+  document.querySelectorAll("[data-alt-pl]").forEach(e=>e.alt=lang==="pl"?e.dataset.altPl:e.dataset.altEn);
   const d=lang==="en"?EN:PL;
   document.querySelectorAll("[data-i]").forEach(e=>{if(d[e.dataset.i])e.textContent=d[e.dataset.i]});
   document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
@@ -456,7 +457,7 @@ function render(){
 }
 function open(i){
   const p=P[i],t=p[lang],u=UI[lang];
-  let g="";for(let k=2;k<=p.n;k++)g+=`<img src="images/projects/${p.slug}/visual-0${k}.jpg" alt="${t.name}, kadr ${k}" loading="lazy">`;
+  let g="";for(let k=2;k<=p.n;k++)g+=`<img src="images/projects/${p.slug}/visual-0${k}.jpg" alt="${t.name}, ${lang==="pl"?"kadr":"view"} ${k}" loading="lazy">`;
   body.innerHTML=`<header><div><span class="label">${t.type}</span><h3 id="dlg-title">${t.name}</h3></div><button class="close" type="button" id="close">${u.close}</button></header>
   <img src="images/projects/${p.slug}/visual-01.jpg" alt="${t.short}" style="width:100%">
   <p class="long">${t.long}</p>
@@ -510,11 +511,12 @@ loadIG();
 /* hero slideshow: one frame per project, crossfade every 6 s */
 const S=[{src:"images/hero-01.jpg",p:0}].concat(P.slice(1).map((p,i)=>({src:`images/projects/${p.slug}/visual-01.jpg`,p:i+1})));
 const box=document.getElementById("slides"),dots=document.getElementById("dots"),sname=document.getElementById("slide-name");
-S.slice(1).forEach(s=>{const im=new Image();im.src=s.src;im.alt="";im.width=1402;im.height=1122;box.append(im)});
+let added=false;const addSlides=()=>{if(added)return;added=true;S.slice(1).forEach(s=>{const im=new Image();im.src=s.src;im.alt="";im.width=1402;im.height=1122;box.append(im)})};
+if(document.readyState==="complete")addSlides();else addEventListener("load",addSlides);
 dots.innerHTML=S.map((s,i)=>`<button type="button" aria-label="${P[s.p].pl.name}"></button>`).join("");
 let cur=0,timer;
 function show(i){
-  const imgs=box.children,bs=dots.children;
+  addSlides();const imgs=box.children,bs=dots.children;
   imgs[cur].classList.remove("on");bs[cur].classList.remove("on");
   cur=(i+S.length)%S.length;imgs[cur].classList.add("on");void bs[cur].offsetWidth;bs[cur].classList.add("on");
   sname.textContent=P[S[cur].p][lang].name;
