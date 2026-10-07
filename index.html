@@ -193,9 +193,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--cobalt)}
 /* intro: liquid "Stankiewicz Design" on black, ~2.6 s, once per visit */
 .intro{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-items:center;transition:opacity .6s ease,visibility .6s;cursor:pointer}
 .intro.out{opacity:0;visibility:hidden}
-.intro .morph{position:relative;width:100%;height:1.1em;text-align:center;font:300 clamp(40px,8.5vw,120px)/1 var(--display);color:#fff;letter-spacing:-.01em;filter:url(#threshold) blur(.6px)}
+.intro .morph{position:relative;width:100%;height:1.1em;text-align:center;font:300 clamp(46px,8.5vw,120px)/1 var(--display);color:#fff;letter-spacing:-.01em;filter:url(#threshold) blur(.6px)}
 .intro .morph span{position:absolute;inset:0;margin:auto;white-space:nowrap}
 .intro svg{position:absolute;width:0;height:0}
+.intro.soft .morph{filter:none}
 footer{border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
 
@@ -227,13 +228,17 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 (function(){
   const el=document.getElementById("intro");
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return}
+  /* Safari and every iPhone browser (WebKit) wipe out the text with the SVG threshold filter, so there we use a soft blur crossfade */
+  const ua=navigator.userAgent,soft=/AppleWebKit/.test(ua)&&!/(Chrome|Chromium|Android)\//.test(ua);
+  if(soft)el.classList.add("soft");
   document.documentElement.style.overflow="hidden";
   const a=document.getElementById("m1"),b=document.getElementById("m2");
   const words=["Stankiewicz","Design"],MORPH=1.0,HOLD=0.9;
   let t0=null,raf;
+  const cap=soft?12:100,pw=soft?1:.4;
   function style(f){
-    b.style.filter=`blur(${Math.min(8/f-8,100)}px)`;b.style.opacity=`${Math.pow(f,.4)*100}%`;
-    const g=1-f;a.style.filter=`blur(${Math.min(8/g-8,100)}px)`;a.style.opacity=`${Math.pow(g,.4)*100}%`;
+    b.style.filter=`blur(${Math.min(8/f-8,cap)}px)`;b.style.opacity=`${Math.pow(f,pw)*100}%`;
+    const g=1-f;a.style.filter=`blur(${Math.min(8/g-8,cap)}px)`;a.style.opacity=`${Math.pow(g,pw)*100}%`;
   }
   function frame(now){
     if(t0===null)t0=now;
