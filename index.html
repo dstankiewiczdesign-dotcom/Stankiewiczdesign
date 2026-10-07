@@ -184,9 +184,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paper)}
 .btn.solid{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
 .btn.solid:hover,.btn.solid:focus-visible{background:var(--paper);border-color:var(--paper);color:var(--ink)}
 .light .btn{border-color:#fff;color:#fff}
-/* body paragraphs in a readable tint of the brand cobalt (pure #1B34C4 is too dark to read on black) */
+/* section labels in a readable tint of the brand cobalt (pure #1B34C4 is too dark to read on black) */
 :root{--cobalt-text:#7E92FF}
-section p:not(.label):not(.note),.principles p,.philo p,.row p,.proj p,.about p,.contact .lead,.news p.lead,.hero .sub{color:var(--cobalt-text)}
+section p:not(.label):not(.note),.principles p,.philo p,.row p,.proj p,.about p,.contact .lead,.news p.lead{color:var(--paper)}
+section .label,.proj .label,.row > .label{color:var(--cobalt-text)}
 input:focus,select:focus,textarea:focus{border-color:var(--cobalt)}
 .dots button::after{background:var(--cobalt)}
 footer{border-top:1px solid var(--line)}
