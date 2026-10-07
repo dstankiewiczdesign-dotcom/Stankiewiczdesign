@@ -23,7 +23,7 @@
 /* Layout: one dark editorial column; full-bleed render, then a quiet grid of materials. Deliberately single dark theme (brand colour #0A0A0B). */
 :root{
   --ink:#0A0A0B; --ink-2:#131316; --ink-3:#1B1C20;
-  --paper:#EDEAE4; --concrete:#8B8882; --cobalt:#3B54E6;
+  --paper:#EDEAE4; --concrete:#8B8882; --steel:#B4B6B8; --cobalt:#1B34C4;
   --line:rgba(237,234,228,.14);
   --display:"Fraunces","Iowan Old Style",Georgia,serif;
   --body:"Nunito Sans","Avenir Next",Avenir,system-ui,sans-serif;
@@ -172,6 +172,20 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paper)}
 .news .row2 input{flex:1;min-width:0}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--concrete);cursor:pointer}
 .consent input{width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--paper)}
+/* palette from the original studio site: paper sections, cobalt accent, steel copy */
+::selection{background:var(--cobalt);color:#fff}
+.light{background:var(--paper);color:var(--ink);--line:rgba(10,10,11,.14)}
+.light .label{color:#6E6B66}
+.light .principles article{background:var(--paper)}
+.light .principles p,.light .philo,.light .row p{color:#4A4844}
+.light + .light{border-top:0;padding-top:0}
+.row > .label,.light .row > .label{color:var(--cobalt)}
+.btn.solid{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.btn.solid:hover,.btn.solid:focus-visible{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.light .btn{border-color:var(--ink);color:var(--ink)}
+.about p,.contact .lead,.news p.lead,.proj p,#proces .row p{color:var(--steel)}
+input:focus,select:focus,textarea:focus{border-color:var(--cobalt)}
+.dots button::after{background:var(--cobalt)}
 footer{border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
 
@@ -205,8 +219,8 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
       <a href="#kontakt" data-i="nav_contact">Kontakt</a>
     </div>
     <div class="lang" role="group" aria-label="Język / Language">
-      <button type="button" data-lang="pl" aria-pressed="true">PL</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="pl" aria-pressed="false">PL</button>
     </div>
   </div>
 </nav>
@@ -227,7 +241,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   <div class="slide-info"><span class="label" id="slide-name">Apartament 01</span><div class="dots" id="dots"></div></div>
 </header>
 
-<section id="filozofia">
+<section id="filozofia" class="light">
   <div class="wrap">
     <div class="head">
       <p class="label" data-i="ph_label">Filozofia</p>
@@ -257,7 +271,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   </div>
 </section>
 
-<section id="oferta">
+<section id="oferta" class="light">
   <div class="wrap">
     <div class="head">
       <p class="label" data-i="of_label">Zakres pracy</p>
