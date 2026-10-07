@@ -190,6 +190,12 @@ section p:not(.label):not(.note),.principles p,.philo p,.row p,.proj p,.about p,
 section .label,.proj .label,.row > .label{color:var(--cobalt-text)}
 input:focus,select:focus,textarea:focus{border-color:var(--cobalt)}
 .dots button::after{background:var(--cobalt)}
+/* intro: liquid "Stankiewicz Design" on black, ~2.6 s, once per visit */
+.intro{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-items:center;transition:opacity .6s ease,visibility .6s;cursor:pointer}
+.intro.out{opacity:0;visibility:hidden}
+.intro .morph{position:relative;width:100%;height:1.1em;text-align:center;font:300 clamp(40px,8.5vw,120px)/1 var(--display);color:#fff;letter-spacing:-.01em;filter:url(#threshold) blur(.6px)}
+.intro .morph span{position:absolute;inset:0;margin:auto;white-space:nowrap}
+.intro svg{position:absolute;width:0;height:0}
 footer{border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
 
@@ -212,6 +218,37 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stankiewicz Design","url":"https://stankiewicz.design/","logo":"https://stankiewicz.design/icon-192.png","email":"studio@stankiewicz.design","telephone":"+31639283666","sameAs":["https://www.instagram.com/stankiewiczdesign","https://www.pinterest.com/StankiewiczDesign/","https://www.tiktok.com/@stankiewiczdesign"]}</script>
 </head>
 <body>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="morph"><span id="m1"></span><span id="m2"></span></div>
+  <svg><defs><filter id="threshold"><feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/></filter></defs></svg>
+</div>
+<script>
+/* liquid text intro, adapted from the MorphingText component to plain JS */
+(function(){
+  const el=document.getElementById("intro");let seen=false;
+  try{seen=sessionStorage.getItem("sd-intro")==="1";sessionStorage.setItem("sd-intro","1")}catch(e){}
+  if(seen||matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return}
+  document.documentElement.style.overflow="hidden";
+  const a=document.getElementById("m1"),b=document.getElementById("m2");
+  const words=["Stankiewicz","Stankiewicz Design"],MORPH=0.9,HOLD=0.35;
+  let t0=performance.now(),raf;
+  function style(f){
+    b.style.filter=`blur(${Math.min(8/f-8,100)}px)`;b.style.opacity=`${Math.pow(f,.4)*100}%`;
+    const g=1-f;a.style.filter=`blur(${Math.min(8/g-8,100)}px)`;a.style.opacity=`${Math.pow(g,.4)*100}%`;
+  }
+  function frame(now){
+    const t=(now-t0)/1000;
+    // stage 0: "" -> words[0]; stage 1: words[0] -> words[1]
+    const stage=Math.min(Math.floor(t/(MORPH+HOLD)),words.length-1),local=t-stage*(MORPH+HOLD);
+    a.textContent=stage===0?"":words[stage-1];b.textContent=words[stage];
+    if(local<MORPH)style(Math.max(local/MORPH,.001));else{b.style.filter="none";b.style.opacity="100%";a.style.opacity="0%"}
+    if(t<words.length*(MORPH+HOLD))raf=requestAnimationFrame(frame);else done();
+  }
+  function done(){cancelAnimationFrame(raf);el.classList.add("out");document.documentElement.style.overflow="";setTimeout(()=>el.remove(),700)}
+  el.addEventListener("click",done);
+  raf=requestAnimationFrame(frame);
+})();
+</script>
 <nav>
   <div class="wrap">
     <a class="brand" href="#top">Stankiewicz Design</a>
