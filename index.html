@@ -225,9 +225,8 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 <script>
 /* liquid text intro, adapted from the MorphingText component to plain JS */
 (function(){
-  const el=document.getElementById("intro");let seen=false;
-  try{seen=sessionStorage.getItem("sd-intro")==="1";sessionStorage.setItem("sd-intro","1")}catch(e){}
-  if(seen||matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return}
+  const el=document.getElementById("intro");
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return}
   document.documentElement.style.overflow="hidden";
   const a=document.getElementById("m1"),b=document.getElementById("m2");
   const words=["Stankiewicz","Stankiewicz Design"],MORPH=0.9,HOLD=0.35;
