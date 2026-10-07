@@ -230,12 +230,13 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   document.documentElement.style.overflow="hidden";
   const a=document.getElementById("m1"),b=document.getElementById("m2");
   const words=["Stankiewicz","Design"],MORPH=1.0,HOLD=0.9;
-  let t0=performance.now(),raf;
+  let t0=null,raf;
   function style(f){
     b.style.filter=`blur(${Math.min(8/f-8,100)}px)`;b.style.opacity=`${Math.pow(f,.4)*100}%`;
     const g=1-f;a.style.filter=`blur(${Math.min(8/g-8,100)}px)`;a.style.opacity=`${Math.pow(g,.4)*100}%`;
   }
   function frame(now){
+    if(t0===null)t0=now;
     const t=(now-t0)/1000;
     // stage 0: "" -> words[0]; stage 1: words[0] -> words[1]
     const stage=Math.min(Math.floor(t/(MORPH+HOLD)),words.length-1),local=t-stage*(MORPH+HOLD);
@@ -245,7 +246,10 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   }
   function done(){cancelAnimationFrame(raf);el.classList.add("out");document.documentElement.style.overflow="";setTimeout(()=>el.remove(),700)}
   el.addEventListener("click",done);
-  raf=requestAnimationFrame(frame);
+  /* start only once the page is painted and the font is ready, so phones see the first word */
+  let go=false;const start=()=>{if(go)return;go=true;raf=requestAnimationFrame(()=>requestAnimationFrame(frame))};
+  if(document.fonts&&document.fonts.load)document.fonts.load('300 64px "Fraunces"',"Stankiewicz Design").then(start,start);else start();
+  setTimeout(start,1500);
 })();
 </script>
 <nav>
