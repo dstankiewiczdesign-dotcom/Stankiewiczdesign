@@ -143,7 +143,8 @@ form{display:grid;gap:18px}
 input,select,textarea{font:300 16px var(--body);color:var(--paper);background:var(--ink-2);border:1px solid var(--line);padding:12px 14px;border-radius:0;width:100%}
 textarea{min-height:140px;resize:vertical}
 .note{font-size:13px;color:var(--concrete)}
-.note.ok{color:var(--paper)}
+.done{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(10,10,11,.78);backdrop-filter:blur(6px);font:300 italic clamp(56px,10vw,140px)/1 var(--display);color:var(--paper);opacity:0;pointer-events:none;transition:opacity .5s}
+.done.on{opacity:1;pointer-events:auto}
 .hp{position:absolute;left:-9999px}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paper)}
 .close{transition:border-color .2s,transform .2s,box-shadow .2s}
@@ -291,7 +292,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
         <a href="https://www.pinterest.com/StankiewiczDesign/">Pinterest</a>
       </div>
     </div>
-    <form id="form" action="https://formsubmit.co/d.stankiewicz.design@gmail.com" method="POST">
+    <form id="form" action="kontakt.php" method="POST">
       <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label class="label" for="f-name" data-i="f_name">Imię</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
@@ -311,6 +312,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 
 <footer><div class="wrap"><span class="label">© 2026 Stankiewicz Design · Nijmegen</span><a class="label" href="#top" data-i="top">Na górę ↑</a></div></footer>
 
+<div class="done" id="done" role="status" aria-live="polite"></div>
 <dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg" id="dlg-body"></div></dialog>
 
 <script>
@@ -329,7 +331,7 @@ const P=[
   en:{name:"Marble Bathroom",type:"Interior concept",short:"Dark marble, walnut cladding and polished concrete, with light hidden along every edge.",long:"Every light source in this bathroom is hidden. Strips run in recesses, along the stone edges and behind the mirror, so the material glows instead of being lit. Dark marble carries the mass, walnut adds warmth, and the window onto the city gives the only cool light in the room.",mat:["Dark marble","Walnut","Plaster","Polished concrete","White ceramic"],mood:["Hidden light","Warmth by stone","Calm","Depth"]}}
 ];
 const EN={nav_portfolio:"Portfolio",nav_process:"Process",nav_about:"About",nav_contact:"Contact",hero_label:"Interior design · 3D visualization · Nijmegen",hero_sub:"Interior design & 3D visualization studio. Light, material, proportion, silence.",cta_projects:"View projects",cta_contact:"Describe your space",ph_label:"Philosophy",ph_title:"An interior does not begin with furniture. It begins with a mood that is meant to stay.",p1:"Atmosphere",p1t:"Before the furniture comes the mood. That is what stays in the head long after leaving the room.",p2:"Material",p2t:"Stone, concrete, steel and wood pretend to be nothing else. Their weight and texture carry everything.",p3:"Light",p3t:"One direction instead of even brightness. Shadow here is a material, not an absence of light.",p4:"Composition",p4t:"Proportion, axis and emptiness. What is missing from the frame works as hard as what stands in it.",ph1:"I design through light, material, silence and proportion. Not by adding more, but by removing what is not needed and placing what remains exactly where it belongs.",ph2:"A visualization here is not a product catalogue. It is an attempt to show how a space will feel at a given hour of the day, before anyone drives the first nail into a wall.",pf_title:"Four interior concepts, each built on a single decision.",of_label:"Scope of work",of_title:"From concept to the frame that sells the space.",o1:"Interior concept",o1t:"Layout, proportion, materials and light. A complete concept ready for contractor pricing.",o2:"Premium 3D visualization",o2t:"Realistic frames with cinematic light. Not a furniture presentation, but the atmosphere of a space.",o3:"Moodboard & material direction",o3t:"A rendered scene with material samples. A direction you can see before the project begins.",o4:"Cinematic presentation",o4t:"A sequence of frames for a development or a portfolio. Material that sells the space, not the floor plan.",pr_label:"Process",pr_title:"Four steps. You see the atmosphere before the first plan exists.",s1t:"We talk about the space, the way you live and what is meant to stay in your head. Without this, the rest is guesswork.",s2:"Direction",s2t:"Moodboard and material direction. You see the atmosphere before the first plan exists.",s3:"Visualize",s3t:"Visualizations in the final light. We check proportion and materials on frames, not on samples.",s4:"Present",s4t:"A complete set of materials and documentation. I also help choose contractors and material sources.",ab_label:"About",ab_title:"An author-led studio, not an agency.",ab1:"Stankiewicz Design is an author-led interior design and 3D visualization studio focused on atmospheric, mood-led spaces. I create interiors that are not only seen, but felt before they are built. My work is based on light, material, proportion, silence and cinematic composition.",ab2:"Based in Nijmegen, working internationally.",ct_label:"Contact",ct_title:"Describe the space you have in mind.",ct_lead:"I answer every message personally. The more you write about the space and how it should work, the more concrete my answer will be.",copy:"Copy",f_name:"Name",f_type:"Project type",f_msg:"Message",f_send:"Send message",top:"Back to top ↑"};
-const UI={pl:{more:"Zobacz projekt →",mat:"Paleta materiałowa",mood:"Nastrój",close:"Zamknij",copied:"Skopiowano",sending:"Wysyłam…",sent:"Dziękuję, wiadomość dotarła. Odpowiem najszybciej, jak to możliwe.",fail:"Nie udało się wysłać. Otwieram Twój program pocztowy z gotową wiadomością."},en:{more:"View project →",mat:"Material palette",mood:"Mood",close:"Close",copied:"Copied",sending:"Sending…",sent:"Thank you, your message has arrived. I will reply as soon as I can.",fail:"Could not send. Opening your mail app with the message ready."}};
+const UI={pl:{more:"Zobacz projekt →",mat:"Paleta materiałowa",mood:"Nastrój",close:"Zamknij",copied:"Skopiowano",sending:"Wysyłam…",done:"Wysłane",sent:"Dziękuję, wiadomość dotarła. Odpowiem najszybciej, jak to możliwe.",fail:"Nie udało się wysłać. Otwieram Twój program pocztowy z gotową wiadomością."},en:{more:"View project →",mat:"Material palette",mood:"Mood",close:"Close",copied:"Copied",sending:"Sending…",done:"Sent",sent:"Thank you, your message has arrived. I will reply as soon as I can.",fail:"Could not send. Opening your mail app with the message ready."}};
 const PL={};document.querySelectorAll("[data-i]").forEach(e=>{PL[e.dataset.i]??=e.textContent});
 let lang="pl";try{lang=localStorage.getItem("sd-lang")||"pl"}catch(e){}
 const grid=document.getElementById("grid"),dlg=document.getElementById("dlg"),body=document.getElementById("dlg-body");
@@ -355,19 +357,19 @@ grid.addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(b)open
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;try{localStorage.setItem("sd-lang",lang)}catch(e){}render();sname.textContent=P[S[cur].p][lang].name});
 document.getElementById("copy").onclick=async e=>{const m=document.getElementById("mail").textContent;try{await navigator.clipboard.writeText(m);e.target.textContent=UI[lang].copied}catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById("mail"));getSelection().removeAllRanges();getSelection().addRange(r)}};
-const form=document.getElementById("form"),note=document.getElementById("form-note"),send=document.getElementById("send");
+const form=document.getElementById("form"),note=document.getElementById("form-note"),send=document.getElementById("send"),done=document.getElementById("done");
 form.addEventListener("submit",async e=>{
   e.preventDefault();if(form._honey.value)return;
-  const f=Object.fromEntries(new FormData(form));delete f._honey;
-  f._subject="Nowe zapytanie ze strony: "+f.name;f._template="table";f._replyto=f.email;
-  note.className="note";note.textContent=UI[lang].sending;send.disabled=true;
+  const fd=new FormData(form),f=Object.fromEntries(fd);
+  note.textContent=UI[lang].sending;send.disabled=true;
   try{
-    const r=await fetch("https://formsubmit.co/ajax/d.stankiewicz.design@gmail.com",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(f)});
-    const j=await r.json();if(!r.ok||String(j.success)!=="true")throw 0;
-    note.className="note ok";note.textContent=UI[lang].sent;form.reset();
+    const r=await fetch("kontakt.php",{method:"POST",body:fd,headers:{Accept:"application/json"}});
+    const j=await r.json();if(!r.ok||!j.ok)throw 0;
+    form.reset();note.textContent="";
+    done.textContent=UI[lang].done;done.classList.add("on");setTimeout(()=>done.classList.remove("on"),2600);
   }catch(_){
     note.textContent=UI[lang].fail;
-    location.href="mailto:d.stankiewicz.design@gmail.com?subject="+encodeURIComponent(f._subject+" ("+f.type+")")+"&body="+encodeURIComponent(f.message+"\n\n"+f.name+" · "+f.email);
+    location.href="mailto:d.stankiewicz.design@gmail.com?subject="+encodeURIComponent("Zapytanie ze strony: "+f.name+" ("+f.type+")")+"&body="+encodeURIComponent(f.message+"\n\n"+f.name+" · "+f.email);
   }finally{send.disabled=false}
 });
 /* hero slideshow: one frame per project, crossfade every 6 s */
