@@ -428,14 +428,17 @@ nl.addEventListener("submit",async e=>{
   }catch(_){nlNote.textContent=UI[lang].fail_nl}finally{nlSend.disabled=false}
 });
 /* instagram: posts come from a Behold.so feed of the studio account */
-const IG_FEED="";
+const IG_FEED="https://feeds.behold.so/K7NfVXLiMDaQ8rR1hte4";
 const ig=document.getElementById("ig");
 async function loadIG(){
   const empty=()=>{ig.innerHTML=`<p class="empty">${UI[lang].ig_empty}</p>`};
   if(!IG_FEED)return empty();
   try{const r=await fetch(IG_FEED);const d=await r.json();const posts=(Array.isArray(d)?d:d.posts||[]).slice(0,8);if(!posts.length)return empty();
     ig.innerHTML=posts.map(p=>{const src=(p.sizes&&p.sizes.medium&&p.sizes.medium.mediaUrl)||(p.mediaType==="VIDEO"?p.thumbnailUrl:p.mediaUrl);const alt=(p.prunedCaption||p.caption||"Post na Instagramie").slice(0,120).replace(/"/g,"&quot;");return `<a href="${p.permalink}" target="_blank" rel="noopener"><img src="${src}" alt="${alt}" loading="lazy"></a>`}).join("");
-  }catch(_){empty()}
+  }catch(_){ // feed JSON unreachable: fall back to Behold's own widget
+    ig.innerHTML='<behold-widget feed-id="K7NfVXLiMDaQ8rR1hte4" style="grid-column:1/-1"></behold-widget>';
+    if(!window.__bhldScript){window.__bhldScript=true;const sc=document.createElement("script");sc.type="module";sc.src="https://w.behold.so/widget.js";document.head.append(sc)}
+  }
 }
 loadIG();
 /* hero slideshow: one frame per project, crossfade every 6 s */
