@@ -184,7 +184,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paper)}
 .btn.solid{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
 .btn.solid:hover,.btn.solid:focus-visible{background:var(--paper);border-color:var(--paper);color:var(--ink)}
 .light .btn{border-color:#fff;color:#fff}
-.about p,.contact .lead,.news p.lead,.proj p,#proces .row p{color:var(--steel)}
+/* body paragraphs in a readable tint of the brand cobalt (pure #1B34C4 is too dark to read on black) */
+:root{--cobalt-text:#7E92FF}
+section p:not(.label):not(.note),.principles p,.philo p,.row p,.proj p,.about p,.contact .lead,.news p.lead,.hero .sub{color:var(--cobalt-text)}
 input:focus,select:focus,textarea:focus{border-color:var(--cobalt)}
 .dots button::after{background:var(--cobalt)}
 footer{border-top:1px solid var(--line)}
@@ -242,7 +244,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   <div class="slide-info"><span class="label" id="slide-name">Apartament 01</span><div class="dots" id="dots"></div></div>
 </header>
 
-<section id="filozofia" class="light">
+<section id="filozofia">
   <div class="wrap">
     <div class="head">
       <p class="label" data-i="ph_label">Filozofia</p>
@@ -272,7 +274,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   </div>
 </section>
 
-<section id="oferta" class="light">
+<section id="oferta">
   <div class="wrap">
     <div class="head">
       <p class="label" data-i="of_label">Zakres pracy</p>
