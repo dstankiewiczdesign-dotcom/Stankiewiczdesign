@@ -45,8 +45,9 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(
 nav .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
 .brand{font:600 13px/1 var(--body);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;margin-right:auto}
 .links{display:flex;gap:22px;flex-wrap:wrap}
-.links a{font-size:14px;text-decoration:none;color:var(--concrete);transition:color .2s}
-.links a:hover{color:var(--paper)}
+.links a{font-size:14px;text-decoration:none;color:var(--concrete);transition:color .2s;background:linear-gradient(var(--paper),var(--paper)) left bottom/0 1px no-repeat;padding-bottom:3px;transition:color .2s,background-size .35s}
+.links a:hover{color:var(--paper);background-size:100% 1px}
+.lang button{transition:background .2s,color .2s}.lang button:hover{color:var(--paper)}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .lang button{all:unset;cursor:pointer;font:400 11px/1 var(--mono);letter-spacing:.12em;padding:7px 11px;color:var(--concrete)}
 .lang button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
@@ -54,15 +55,27 @@ nav .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
 
 /* hero */
 .hero{position:relative;min-height:min(86vh,820px);display:grid;align-items:end;overflow:hidden}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72;animation:drift 18s ease-out both}
-@keyframes drift{from{transform:scale(1.08)}to{transform:scale(1)}}
+.slides{position:absolute;inset:0}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease,transform 9s ease-out}
+.slides img.on{opacity:.72;transform:scale(1)}
+.slide-info{position:absolute;right:clamp(16px,4vw,48px);bottom:28px;z-index:2;display:flex;align-items:center;gap:14px}
+.slide-info .label{color:var(--paper);transition:opacity .6s}
+.dots{display:flex;gap:6px}
+.dots button{all:unset;cursor:pointer;width:22px;height:2px;background:rgba(242,239,233,.3);position:relative;overflow:hidden}
+.dots button::after{content:"";position:absolute;inset:0;background:var(--paper);transform:scaleX(0);transform-origin:left}
+.dots button.on::after{animation:fill 6s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+@media (max-width:600px){.slide-info{left:16px;right:auto;bottom:12px}}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.1) 30%,var(--ink) 100%)}
 .hero .wrap{position:relative;z-index:1;padding-block:64px;width:100%}
 .hero h1{font-size:clamp(46px,8.4vw,128px);line-height:.95;font-style:italic}
 .hero .sub{margin-top:22px;max-width:46ch;font-size:clamp(17px,1.6vw,20px);color:var(--paper)}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.btn{display:inline-block;padding:13px 22px;border:1px solid var(--paper);text-decoration:none;font:600 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;transition:background .2s,color .2s;background:none;color:var(--paper);cursor:pointer}
-.btn.solid,.btn:hover{background:var(--paper);color:var(--ink)}
+.btn{display:inline-block;padding:13px 22px;border:1px solid var(--paper);text-decoration:none;font:600 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;transition:background .3s,color .3s,transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;background:none;color:var(--paper);cursor:pointer}
+.btn.solid{background:var(--paper);color:var(--ink)}
+.btn:hover,.btn:focus-visible{background:var(--paper);color:var(--ink);transform:translateY(-3px);box-shadow:0 0 0 1px var(--paper),0 10px 34px rgba(242,239,233,.28)}
+.btn:active{transform:translateY(-1px)}
+.btn[disabled]{opacity:.6;pointer-events:none}
 
 section{padding-block:clamp(72px,10vw,140px);border-top:1px solid var(--line)}
 .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px 48px;margin-bottom:56px}
@@ -86,7 +99,11 @@ blockquote{margin:72px 0 0;max-width:24ch;font:300 italic clamp(28px,3.6vw,46px)
 .proj{all:unset;cursor:pointer;display:grid;gap:14px;min-width:0}
 .proj .frame{overflow:hidden;aspect-ratio:5/4;max-width:100%;background:var(--ink-2)}
 .proj img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.proj:hover img{transform:scale(1.04)}
+.proj:hover img{transform:scale(1.05)}
+.proj .frame{transition:box-shadow .4s,transform .4s cubic-bezier(.2,.7,.2,1)}
+.proj:hover .frame{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.proj .more{display:inline-block;transition:transform .3s}
+.proj:hover .more{transform:translateX(6px)}
 .proj h3{font-size:30px}
 .proj p{color:var(--concrete);font-size:15px;max-width:52ch}
 .proj .more{font:400 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--paper)}
@@ -113,15 +130,24 @@ blockquote{margin:72px 0 0;max-width:24ch;font:300 italic clamp(28px,3.6vw,46px)
 .contact .lead{color:var(--concrete);max-width:44ch}
 .mail{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:28px}
 .mail code{font:400 15px var(--mono);user-select:all;word-break:break-all}
-.mail button{all:unset;cursor:pointer;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:8px 10px}
+.mail button{all:unset;cursor:pointer;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:8px 10px;transition:border-color .2s,transform .2s,box-shadow .2s}
+.mail button:hover,.close:hover{border-color:var(--paper);transform:translateY(-2px);box-shadow:0 6px 20px rgba(242,239,233,.15)}
+.phone{display:block;margin-top:14px;font:400 15px var(--mono);text-decoration:none;color:var(--paper)}
+.phone:hover{text-decoration:underline}
 .social{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px}
 .social a{font-size:14px;color:var(--concrete);text-decoration:none;border-bottom:1px solid var(--line)}
-.social a:hover{color:var(--paper)}
+.social a{transition:color .2s,border-color .2s,transform .2s;display:inline-block}
+.social a:hover{color:var(--paper);border-color:var(--paper);transform:translateY(-2px)}
 form{display:grid;gap:18px}
 .field{display:grid;gap:6px}
 input,select,textarea{font:300 16px var(--body);color:var(--paper);background:var(--ink-2);border:1px solid var(--line);padding:12px 14px;border-radius:0;width:100%}
 textarea{min-height:140px;resize:vertical}
 .note{font-size:13px;color:var(--concrete)}
+.note.ok{color:var(--paper)}
+.hp{position:absolute;left:-9999px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paper)}
+.close{transition:border-color .2s,transform .2s,box-shadow .2s}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.slides img{transform:none!important}}
 footer{border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
 
@@ -160,7 +186,9 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 </nav>
 
 <header class="hero" id="top">
-  <img src="images/hero-01.jpg" width="1402" height="1122" alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle">
+  <div class="slides" id="slides">
+    <img class="on" src="images/hero-01.jpg" width="1402" height="1122" alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle">
+  </div>
   <div class="wrap">
     <p class="label" data-i="hero_label">Projektowanie wnętrz · Wizualizacje 3D · Nijmegen</p>
     <h1>Before it’s built,<br>it’s felt.</h1>
@@ -170,6 +198,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
       <a class="btn" href="#kontakt" data-i="cta_contact">Opisz swoją przestrzeń</a>
     </div>
   </div>
+  <div class="slide-info"><span class="label" id="slide-name">Apartament 01</span><div class="dots" id="dots"></div></div>
 </header>
 
 <section id="filozofia">
@@ -254,6 +283,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
         <code id="mail">d.stankiewicz.design@gmail.com</code>
         <button type="button" id="copy" data-i="copy">Kopiuj</button>
       </div>
+      <a class="phone" href="tel:+31600000000">+31 6 00 00 00 00</a>
       <div class="social">
         <a href="https://www.instagram.com/stankiewiczdesign">Instagram</a>
         <a href="https://www.facebook.com/profile.php?id=61581186960442">Facebook</a>
@@ -261,7 +291,8 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
         <a href="https://www.pinterest.com/StankiewiczDesign/">Pinterest</a>
       </div>
     </div>
-    <form id="form">
+    <form id="form" action="https://formsubmit.co/d.stankiewicz.design@gmail.com" method="POST">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label class="label" for="f-name" data-i="f_name">Imię</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label class="label" for="f-type" data-i="f_type">Typ projektu</label>
@@ -272,8 +303,8 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
           <option data-i="o4">Prezentacja filmowa</option>
         </select></div>
       <div class="field"><label class="label" for="f-msg" data-i="f_msg">Wiadomość</label><textarea id="f-msg" name="message" required></textarea></div>
-      <button class="btn solid" type="submit" data-i="f_send">Przygotuj brief</button>
-      <p class="note" id="form-note" data-i="f_note">Podgląd: formularz nie jest jeszcze podpięty do skrzynki. Na stronie docelowej podłączymy Formspree albo podobną usługę.</p>
+      <button class="btn solid" type="submit" id="send" data-i="f_send">Wyślij wiadomość</button>
+      <p class="note" id="form-note" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -297,8 +328,8 @@ const P=[
   pl:{name:"Łazienka marmurowa",type:"Koncepcja wnętrza",short:"Ciemny marmur, orzechowa okładzina i polerowany beton, ze światłem ukrytym wzdłuż każdej krawędzi.",long:"Każde źródło światła w tej łazience jest ukryte. Taśmy biegną w szczelinach, wzdłuż krawędzi kamienia i za lustrem, dzięki czemu materiał świeci, zamiast być oświetlany. Ciemny marmur niesie masę, orzech dokłada ciepło, a okno na miasto daje jedyne zimne światło.",mat:["Ciemny marmur","Orzech","Tynk","Beton polerowany","Biała ceramika"],mood:["Ukryte światło","Ciepło przy kamieniu","Spokój","Głębia"]},
   en:{name:"Marble Bathroom",type:"Interior concept",short:"Dark marble, walnut cladding and polished concrete, with light hidden along every edge.",long:"Every light source in this bathroom is hidden. Strips run in recesses, along the stone edges and behind the mirror, so the material glows instead of being lit. Dark marble carries the mass, walnut adds warmth, and the window onto the city gives the only cool light in the room.",mat:["Dark marble","Walnut","Plaster","Polished concrete","White ceramic"],mood:["Hidden light","Warmth by stone","Calm","Depth"]}}
 ];
-const EN={nav_portfolio:"Portfolio",nav_process:"Process",nav_about:"About",nav_contact:"Contact",hero_label:"Interior design · 3D visualization · Nijmegen",hero_sub:"Interior design & 3D visualization studio. Light, material, proportion, silence.",cta_projects:"View projects",cta_contact:"Describe your space",ph_label:"Philosophy",ph_title:"An interior does not begin with furniture. It begins with a mood that is meant to stay.",p1:"Atmosphere",p1t:"Before the furniture comes the mood. That is what stays in the head long after leaving the room.",p2:"Material",p2t:"Stone, concrete, steel and wood pretend to be nothing else. Their weight and texture carry everything.",p3:"Light",p3t:"One direction instead of even brightness. Shadow here is a material, not an absence of light.",p4:"Composition",p4t:"Proportion, axis and emptiness. What is missing from the frame works as hard as what stands in it.",ph1:"I design through light, material, silence and proportion. Not by adding more, but by removing what is not needed and placing what remains exactly where it belongs.",ph2:"A visualization here is not a product catalogue. It is an attempt to show how a space will feel at a given hour of the day, before anyone drives the first nail into a wall.",pf_title:"Four interior concepts, each built on a single decision.",of_label:"Scope of work",of_title:"From concept to the frame that sells the space.",o1:"Interior concept",o1t:"Layout, proportion, materials and light. A complete concept ready for contractor pricing.",o2:"Premium 3D visualization",o2t:"Realistic frames with cinematic light. Not a furniture presentation, but the atmosphere of a space.",o3:"Moodboard & material direction",o3t:"A rendered scene with material samples. A direction you can see before the project begins.",o4:"Cinematic presentation",o4t:"A sequence of frames for a development or a portfolio. Material that sells the space, not the floor plan.",pr_label:"Process",pr_title:"Four steps. You see the atmosphere before the first plan exists.",s1t:"We talk about the space, the way you live and what is meant to stay in your head. Without this, the rest is guesswork.",s2:"Direction",s2t:"Moodboard and material direction. You see the atmosphere before the first plan exists.",s3:"Visualize",s3t:"Visualizations in the final light. We check proportion and materials on frames, not on samples.",s4:"Present",s4t:"A complete set of materials and documentation. I also help choose contractors and material sources.",portrait:"Portrait to be added · vertical 4:5",ab_label:"About",ab_title:"An author-led studio, not an agency.",ab1:"Stankiewicz Design is an author-led interior design and 3D visualization studio focused on atmospheric, mood-led spaces. I create interiors that are not only seen, but felt before they are built. My work is based on light, material, proportion, silence and cinematic composition.",ab2:"Based in Nijmegen, working internationally.",ct_label:"Contact",ct_title:"Describe the space you have in mind.",ct_lead:"I answer every message personally. The more you write about the space and how it should work, the more concrete my answer will be.",copy:"Copy",f_name:"Name",f_type:"Project type",f_msg:"Message",f_send:"Send brief",f_note:"Preview: the form is not connected to a mailbox yet. On the live site we will connect Formspree or a similar service.",top:"Back to top ↑"};
-const UI={pl:{more:"Zobacz projekt →",mat:"Paleta materiałowa",mood:"Nastrój",close:"Zamknij",copied:"Skopiowano",sent:"Dziękuję. W podglądzie wiadomość nie jest wysyłana; skopiuj adres e-mail obok."},en:{more:"View project →",mat:"Material palette",mood:"Mood",close:"Close",copied:"Copied",sent:"Thank you. In this preview the message is not sent; copy the e-mail address instead."}};
+const EN={nav_portfolio:"Portfolio",nav_process:"Process",nav_about:"About",nav_contact:"Contact",hero_label:"Interior design · 3D visualization · Nijmegen",hero_sub:"Interior design & 3D visualization studio. Light, material, proportion, silence.",cta_projects:"View projects",cta_contact:"Describe your space",ph_label:"Philosophy",ph_title:"An interior does not begin with furniture. It begins with a mood that is meant to stay.",p1:"Atmosphere",p1t:"Before the furniture comes the mood. That is what stays in the head long after leaving the room.",p2:"Material",p2t:"Stone, concrete, steel and wood pretend to be nothing else. Their weight and texture carry everything.",p3:"Light",p3t:"One direction instead of even brightness. Shadow here is a material, not an absence of light.",p4:"Composition",p4t:"Proportion, axis and emptiness. What is missing from the frame works as hard as what stands in it.",ph1:"I design through light, material, silence and proportion. Not by adding more, but by removing what is not needed and placing what remains exactly where it belongs.",ph2:"A visualization here is not a product catalogue. It is an attempt to show how a space will feel at a given hour of the day, before anyone drives the first nail into a wall.",pf_title:"Four interior concepts, each built on a single decision.",of_label:"Scope of work",of_title:"From concept to the frame that sells the space.",o1:"Interior concept",o1t:"Layout, proportion, materials and light. A complete concept ready for contractor pricing.",o2:"Premium 3D visualization",o2t:"Realistic frames with cinematic light. Not a furniture presentation, but the atmosphere of a space.",o3:"Moodboard & material direction",o3t:"A rendered scene with material samples. A direction you can see before the project begins.",o4:"Cinematic presentation",o4t:"A sequence of frames for a development or a portfolio. Material that sells the space, not the floor plan.",pr_label:"Process",pr_title:"Four steps. You see the atmosphere before the first plan exists.",s1t:"We talk about the space, the way you live and what is meant to stay in your head. Without this, the rest is guesswork.",s2:"Direction",s2t:"Moodboard and material direction. You see the atmosphere before the first plan exists.",s3:"Visualize",s3t:"Visualizations in the final light. We check proportion and materials on frames, not on samples.",s4:"Present",s4t:"A complete set of materials and documentation. I also help choose contractors and material sources.",portrait:"Portrait to be added · vertical 4:5",ab_label:"About",ab_title:"An author-led studio, not an agency.",ab1:"Stankiewicz Design is an author-led interior design and 3D visualization studio focused on atmospheric, mood-led spaces. I create interiors that are not only seen, but felt before they are built. My work is based on light, material, proportion, silence and cinematic composition.",ab2:"Based in Nijmegen, working internationally.",ct_label:"Contact",ct_title:"Describe the space you have in mind.",ct_lead:"I answer every message personally. The more you write about the space and how it should work, the more concrete my answer will be.",copy:"Copy",f_name:"Name",f_type:"Project type",f_msg:"Message",f_send:"Send message",top:"Back to top ↑"};
+const UI={pl:{more:"Zobacz projekt →",mat:"Paleta materiałowa",mood:"Nastrój",close:"Zamknij",copied:"Skopiowano",sending:"Wysyłam…",sent:"Dziękuję, wiadomość dotarła. Odpowiem najszybciej, jak to możliwe.",fail:"Nie udało się wysłać. Otwieram Twój program pocztowy z gotową wiadomością."},en:{more:"View project →",mat:"Material palette",mood:"Mood",close:"Close",copied:"Copied",sending:"Sending…",sent:"Thank you, your message has arrived. I will reply as soon as I can.",fail:"Could not send. Opening your mail app with the message ready."}};
 const PL={};document.querySelectorAll("[data-i]").forEach(e=>{PL[e.dataset.i]??=e.textContent});
 let lang="pl";try{lang=localStorage.getItem("sd-lang")||"pl"}catch(e){}
 const grid=document.getElementById("grid"),dlg=document.getElementById("dlg"),body=document.getElementById("dlg-body");
@@ -322,9 +353,38 @@ function open(i){
 }
 grid.addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(b)open(+b.dataset.p)});
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
-document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;try{localStorage.setItem("sd-lang",lang)}catch(e){}render()});
+document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;try{localStorage.setItem("sd-lang",lang)}catch(e){}render();sname.textContent=P[S[cur].p][lang].name});
 document.getElementById("copy").onclick=async e=>{const m=document.getElementById("mail").textContent;try{await navigator.clipboard.writeText(m);e.target.textContent=UI[lang].copied}catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById("mail"));getSelection().removeAllRanges();getSelection().addRange(r)}};
-document.getElementById("form").addEventListener("submit",e=>{e.preventDefault();document.getElementById("form-note").textContent=UI[lang].sent});
+const form=document.getElementById("form"),note=document.getElementById("form-note"),send=document.getElementById("send");
+form.addEventListener("submit",async e=>{
+  e.preventDefault();if(form._honey.value)return;
+  const f=Object.fromEntries(new FormData(form));delete f._honey;
+  f._subject="Nowe zapytanie ze strony: "+f.name;f._template="table";f._replyto=f.email;
+  note.className="note";note.textContent=UI[lang].sending;send.disabled=true;
+  try{
+    const r=await fetch("https://formsubmit.co/ajax/d.stankiewicz.design@gmail.com",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(f)});
+    const j=await r.json();if(!r.ok||String(j.success)!=="true")throw 0;
+    note.className="note ok";note.textContent=UI[lang].sent;form.reset();
+  }catch(_){
+    note.textContent=UI[lang].fail;
+    location.href="mailto:d.stankiewicz.design@gmail.com?subject="+encodeURIComponent(f._subject+" ("+f.type+")")+"&body="+encodeURIComponent(f.message+"\n\n"+f.name+" · "+f.email);
+  }finally{send.disabled=false}
+});
+/* hero slideshow: one frame per project, crossfade every 6 s */
+const S=[{src:"images/hero-01.jpg",p:0}].concat(P.slice(1).map((p,i)=>({src:`images/projects/${p.slug}/visual-01.jpg`,p:i+1})));
+const box=document.getElementById("slides"),dots=document.getElementById("dots"),sname=document.getElementById("slide-name");
+S.slice(1).forEach(s=>{const im=new Image();im.src=s.src;im.alt="";im.width=1402;im.height=1122;box.append(im)});
+dots.innerHTML=S.map((s,i)=>`<button type="button" aria-label="${P[s.p].pl.name}"></button>`).join("");
+let cur=0,timer;
+function show(i){
+  const imgs=box.children,bs=dots.children;
+  imgs[cur].classList.remove("on");bs[cur].classList.remove("on");
+  cur=(i+S.length)%S.length;imgs[cur].classList.add("on");void bs[cur].offsetWidth;bs[cur].classList.add("on");
+  sname.textContent=P[S[cur].p][lang].name;
+  clearTimeout(timer);timer=setTimeout(()=>show(cur+1),6000);
+}
+dots.addEventListener("click",e=>{const b=e.target.closest("button");if(b)show([...dots.children].indexOf(b))});
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)show(0);
 render();
 </script>
 </body>
