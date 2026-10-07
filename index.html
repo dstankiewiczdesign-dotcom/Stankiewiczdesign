@@ -311,7 +311,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
       <h2 data-i="ct_title">Opisz przestrzeń, którą masz w głowie.</h2>
       <p class="lead" data-i="ct_lead">Odpowiadam na każdą wiadomość osobiście. Im więcej napiszesz o przestrzeni i o tym, jak ma działać, tym konkretniejsza będzie moja odpowiedź.</p>
       <div class="mail">
-        <code id="mail">d.stankiewicz.design@gmail.com</code>
+        <code id="mail">studio@stankiewicz.design</code>
         <button type="button" id="copy" data-i="copy">Kopiuj</button>
       </div>
       <a class="phone" href="tel:+31639283666">+31 6 39 28 36 66</a>
@@ -415,7 +415,7 @@ form.addEventListener("submit",async e=>{
     done.textContent=UI[lang].done;done.classList.add("on");setTimeout(()=>done.classList.remove("on"),2600);
   }catch(_){
     note.textContent=UI[lang].fail;
-    location.href="mailto:d.stankiewicz.design@gmail.com?subject="+encodeURIComponent("Zapytanie ze strony: "+f.name+" ("+f.type+")")+"&body="+encodeURIComponent(f.message+"\n\n"+f.name+" · "+f.email);
+    location.href="mailto:studio@stankiewicz.design?subject="+encodeURIComponent("Zapytanie ze strony: "+f.name+" ("+f.type+")")+"&body="+encodeURIComponent(f.message+"\n\n"+f.name+" · "+f.email);
   }finally{send.disabled=false}
 });
 /* newsletter */
