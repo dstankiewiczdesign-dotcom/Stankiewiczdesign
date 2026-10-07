@@ -229,7 +229,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return}
   document.documentElement.style.overflow="hidden";
   const a=document.getElementById("m1"),b=document.getElementById("m2");
-  const words=["Stankiewicz","Stankiewicz Design"],MORPH=0.9,HOLD=0.35;
+  const words=["Stankiewicz","Design"],MORPH=1.0,HOLD=0.9;
   let t0=performance.now(),raf;
   function style(f){
     b.style.filter=`blur(${Math.min(8/f-8,100)}px)`;b.style.opacity=`${Math.pow(f,.4)*100}%`;
