@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Projektowanie wnętrz i wizualizacje 3D | Stankiewicz Design</title>
+<meta name="description" content="Zanim powstanie, już je czujesz. Studio projektowania wnętrz i wizualizacji 3D. Światło, materiał, proporcja, cisza.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="canonical" href="https://stankiewicz.design/pl/">
+<link rel="alternate" hreflang="en" href="https://stankiewicz.design/">
+<link rel="alternate" hreflang="pl" href="https://stankiewicz.design/pl/">
+<link rel="alternate" hreflang="x-default" href="https://stankiewicz.design/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stankiewicz.design/pl/">
+<meta property="og:title" content="Projektowanie wnętrz i wizualizacje 3D | Stankiewicz Design">
+<meta property="og:description" content="Zanim powstanie, już je czujesz. Studio projektowania wnętrz i wizualizacji 3D. Światło, materiał, proporcja, cisza.">
+<meta property="og:image" content="https://stankiewicz.design/images/og.jpg">
+<meta property="og:locale" content="pl_PL">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600&family=Fraunces:opsz,wght@9..144,300;9..144,400&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stankiewicz Design","url":"https://stankiewicz.design/pl/","logo":"https://stankiewicz.design/icon-192.png","email":"studio@stankiewicz.design","telephone":"+31639283666","address":{"@type":"PostalAddress","addressLocality":"Nijmegen","addressCountry":"NL"},"founder":{"@type":"Person","name":"Damian Stankiewicz"},"areaServed":"Worldwide","sameAs":["https://www.instagram.com/stankiewiczdesign","https://www.pinterest.com/StankiewiczDesign/","https://www.tiktok.com/@stankiewiczdesign"]}</script>
+</head>
+<body data-root="../">
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="morph"><span id="m1"></span><span id="m2"></span></div>
+  <svg><defs><filter id="threshold"><feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/></filter></defs></svg>
+</div>
+<script>
+/* liquid text intro, adapted from the MorphingText component to plain JS */
+(function(){
+  const el=document.getElementById("intro");
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return}
+  /* Safari and every iPhone browser (WebKit) wipe out the text with the SVG threshold filter, so there we use a soft blur crossfade */
+  const ua=navigator.userAgent,soft=/AppleWebKit/.test(ua)&&!/(Chrome|Chromium|Android)\//.test(ua);
+  if(soft)el.classList.add("soft");
+  document.documentElement.style.overflow="hidden";
+  const a=document.getElementById("m1"),b=document.getElementById("m2");
+  const words=["Stankiewicz","Design"],MORPH=1.0,HOLD=0.9;
+  let t0=null,raf;
+  const cap=soft?12:100,pw=soft?1:.4;
+  function style(f){
+    b.style.filter=`blur(${Math.min(8/f-8,cap)}px)`;b.style.opacity=`${Math.pow(f,pw)*100}%`;
+    const g=1-f;a.style.filter=`blur(${Math.min(8/g-8,cap)}px)`;a.style.opacity=`${Math.pow(g,pw)*100}%`;
+  }
+  function frame(now){
+    if(t0===null)t0=now;
+    const t=(now-t0)/1000;
+    // stage 0: "" -> words[0]; stage 1: words[0] -> words[1]
+    const stage=Math.min(Math.floor(t/(MORPH+HOLD)),words.length-1),local=t-stage*(MORPH+HOLD);
+    a.textContent=stage===0?"":words[stage-1];b.textContent=words[stage];
+    if(local<MORPH)style(Math.max(local/MORPH,.001));else{b.style.filter="none";b.style.opacity="100%";a.style.opacity="0%"}
+    if(t<words.length*(MORPH+HOLD))raf=requestAnimationFrame(frame);else done();
+  }
+  function done(){cancelAnimationFrame(raf);el.classList.add("out");document.documentElement.style.overflow="";setTimeout(()=>el.remove(),700)}
+  el.addEventListener("click",done);
+  /* start only once the page is painted and the font is ready, so phones see the first word */
+  let go=false;const start=()=>{if(go)return;go=true;raf=requestAnimationFrame(()=>requestAnimationFrame(frame))};
+  if(document.fonts&&document.fonts.load)document.fonts.load('300 64px "Fraunces"',"Stankiewicz Design").then(start,start);else start();
+  setTimeout(start,1500);
+})();
+</script>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Stankiewicz Design</a>
+    <div class="links">
+      <a href="../pl/projekty/">Projekty</a>
+      <a href="../pl/projektowanie-wnetrz/">Projektowanie wnętrz</a>
+      <a href="../pl/wizualizacje-3d/">Wizualizacje 3D</a>
+      <a href="#about">O mnie</a>
+      <a href="#contact">Kontakt</a>
+    </div>
+    <div class="lang" role="group" aria-label="Język"><a href="../" hreflang="en" lang="en">EN</a><a href="../pl/" hreflang="pl" lang="pl" aria-current="true">PL</a></div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="slides" id="slides" data-slides='[{&quot;src&quot;: &quot;images/hero-01.jpg&quot;, &quot;name&quot;: &quot;Apartament 01&quot;}, {&quot;src&quot;: &quot;images/projects/blue-kitchen/visual-01.jpg&quot;, &quot;name&quot;: &quot;Niebieska kuchnia&quot;}, {&quot;src&quot;: &quot;images/projects/marble-kitchen/visual-01.jpg&quot;, &quot;name&quot;: &quot;Kuchnia marmurowa&quot;}, {&quot;src&quot;: &quot;images/projects/marble-bathroom/visual-01.jpg&quot;, &quot;name&quot;: &quot;Łazienka marmurowa&quot;}]'>
+    <img class="on" src="../images/hero-01.jpg" width="1402" height="1122" fetchpriority="high" alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle">
+  </div>
+  <div class="wrap">
+    <h1 class="label">Projektowanie wnętrz · Wizualizacje 3D · Europa i świat</h1>
+    <p class="slogan">Before it’s built,<br>it’s felt.</p>
+    <p class="sub">Studio projektowania wnętrz i wizualizacji 3D. Światło, materiał, proporcja, cisza.</p>
+    <div class="cta">
+      <a class="btn solid" href="#portfolio">Zobacz projekty</a>
+      <a class="btn" href="#contact">Opisz swoją przestrzeń</a>
+    </div>
+  </div>
+  <div class="slide-info"><span class="label" id="slide-name">Apartament 01</span><div class="dots" id="dots"></div></div>
+</header>
+
+<section id="philosophy">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Filozofia</p>
+      <h2>Wnętrze nie zaczyna się od mebla. Zaczyna się od nastroju, który ma zostać w głowie.</h2>
+    </div>
+    <div class="principles"><article><h3>Atmosfera</h3><p>Zanim pojawi się mebel, pojawia się nastrój. To on zostaje w głowie długo po wyjściu z pomieszczenia.</p></article><article><h3>Materiał</h3><p>Kamień, beton, stal i drewno nie udają niczego innego. Ich ciężar i faktura niosą całą resztę.</p></article><article><h3>Światło</h3><p>Jeden kierunek zamiast równomiernego rozjaśnienia. Cień jest tu materiałem, nie brakiem światła.</p></article><article><h3>Kompozycja</h3><p>Proporcja, oś i pustka. To, czego nie ma w kadrze, pracuje tak samo mocno jak to, co w nim stoi.</p></article></div>
+    <div class="philo">
+      <p>Projektuję przez światło, materiał, ciszę i proporcję. Nie przez dodawanie kolejnych elementów, tylko przez usuwanie tego, co nie jest potrzebne, i ustawienie tego, co zostaje, we właściwym miejscu.</p>
+      <p>Wizualizacja nie jest tu katalogiem produktów. Jest próbą pokazania, jak przestrzeń będzie się czuć o określonej porze dnia, zanim ktokolwiek wbije w ścianę pierwszy kołek.</p>
+    </div>
+    <blockquote>Atmosphere before decoration.</blockquote>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Portfolio</p>
+      <h2>Cztery koncepcje wnętrz, każda zbudowana na jednej decyzji.</h2>
+    </div>
+    <div class="grid"><a class="proj" href="../pl/projekty/apartment-01/"><div class="frame"><img src="../images/projects/apartment-01/visual-01.jpg" width="1402" height="1122" alt="Apartament 01: Beton dla ciężaru, czarna bryła dla napięcia, sztuka jako punkt skupienia i światło jako atmosfera." loading="lazy"></div><span class="label">Koncepcja wnętrza</span><h3>Apartament 01</h3><p>Beton dla ciężaru, czarna bryła dla napięcia, sztuka jako punkt skupienia i światło jako atmosfera.</p><span class="more">Zobacz projekt →</span></a><a class="proj" href="../pl/projekty/blue-kitchen/"><div class="frame"><img src="../images/projects/blue-kitchen/visual-01.jpg" width="1402" height="1122" alt="Niebieska kuchnia: Ultramarynowy lakier przy szczotkowanej stali, pod sztukaterią starszą od obu." loading="lazy"></div><span class="label">Koncepcja wnętrza</span><h3>Niebieska kuchnia</h3><p>Ultramarynowy lakier przy szczotkowanej stali, pod sztukaterią starszą od obu.</p><span class="more">Zobacz projekt →</span></a><a class="proj" href="../pl/projekty/marble-kitchen/"><div class="frame"><img src="../images/projects/marble-kitchen/visual-01.jpg" width="1402" height="1122" alt="Kuchnia marmurowa: Monolityczna wyspa z ciemnozielonego marmuru, matowa czarna zabudowa i jeden kierunek światła." loading="lazy"></div><span class="label">Koncepcja wnętrza</span><h3>Kuchnia marmurowa</h3><p>Monolityczna wyspa z ciemnozielonego marmuru, matowa czarna zabudowa i jeden kierunek światła.</p><span class="more">Zobacz projekt →</span></a><a class="proj" href="../pl/projekty/marble-bathroom/"><div class="frame"><img src="../images/projects/marble-bathroom/visual-01.jpg" width="1402" height="1122" alt="Łazienka marmurowa: Ciemny marmur, orzechowa okładzina i polerowany beton, ze światłem ukrytym wzdłuż każdej krawędzi." loading="lazy"></div><span class="label">Koncepcja wnętrza</span><h3>Łazienka marmurowa</h3><p>Ciemny marmur, orzechowa okładzina i polerowany beton, ze światłem ukrytym wzdłuż każdej krawędzi.</p><span class="more">Zobacz projekt →</span></a></div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Zakres pracy</p>
+      <h2>Od koncepcji do kadru, który sprzedaje przestrzeń.</h2>
+    </div>
+    <div class="rows"><div class="row"><span class="label">A</span><h3><a href="../pl/projektowanie-wnetrz/">Projekt koncepcyjny wnętrza</a></h3><p>Układ, proporcje, materiały i światło. Kompletna koncepcja gotowa do wyceny wykonawczej.</p></div><div class="row"><span class="label">B</span><h3><a href="../pl/wizualizacje-3d/">Wizualizacje 3D premium</a></h3><p>Realistyczne kadry o filmowym świetle. Nie prezentacja mebli, tylko atmosfera przestrzeni.</p></div><div class="row"><span class="label">C</span><h3><a href="../pl/projektowanie-wnetrz/">Moodboard i kierunek materiałowy</a></h3><p>Wyrenderowana scena z próbkami materiałów. Kierunek, który widać, zanim zacznie się projekt.</p></div><div class="row"><span class="label">D</span><h3><a href="../pl/wizualizacje-3d/">Prezentacja filmowa</a></h3><p>Sekwencja kadrów pod inwestycję albo portfolio. Materiał, który sprzedaje przestrzeń, nie rzut.</p></div></div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Proces</p>
+      <h2>Cztery kroki. Atmosferę widzisz, zanim powstanie pierwszy rzut.</h2>
+    </div>
+    <div class="rows"><div class="row"><span class="label">01</span><h3>Brief</h3><p>Rozmawiamy o przestrzeni, stylu życia i o tym, co ma zostać w głowie. Bez tego reszta jest zgadywaniem.</p></div><div class="row"><span class="label">02</span><h3>Kierunek</h3><p>Moodboard i kierunek materiałowy. Widzisz atmosferę, zanim powstanie pierwszy rzut.</p></div><div class="row"><span class="label">03</span><h3>Wizualizacja</h3><p>Wizualizacje w docelowym świetle. Sprawdzamy proporcje i materiały na kadrach, nie na próbkach.</p></div><div class="row"><span class="label">04</span><h3>Prezentacja</h3><p>Komplet materiałów i dokumentacji. Pomagam też dobrać wykonawcę i źródła materiałów.</p></div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <img class="portrait" src="../images/portrait.jpg" width="1000" height="1250" alt="Damian Stankiewicz, projektant wnętrz" loading="lazy">
+    <div>
+      <p class="label">O mnie</p>
+      <h2>Autorskie studio, nie agencja.</h2>
+      <p>Stankiewicz Design to autorskie studio projektowania wnętrz i wizualizacji 3D. Tworzę przestrzenie, które mają nie tylko dobrze wyglądać, ale budować nastrój, napięcie i emocjonalny odbiór. W mojej pracy najważniejsze są światło, materiał, proporcje, cisza i kompozycja.</p>
+      <p class="where">Nijmegen. Pracuję z klientami z całej Europy i świata.</p>
+    </div>
+  </div>
+</section>
+
+<section id="instagram">
+  <div class="wrap">
+    <div class="head"><div><p class="label">Instagram</p></div><h2>Najnowsze kadry z pracowni.</h2></div>
+    <div class="ig" id="ig"></div>
+    <a class="btn ig-more" href="https://www.instagram.com/stankiewiczdesign" target="_blank" rel="noopener">Obserwuj @stankiewiczdesign</a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div>
+      <p class="label">Kontakt</p>
+      <h2>Opisz przestrzeń, którą masz w głowie.</h2>
+      <p class="lead">Odpowiadam na każdą wiadomość osobiście. Im więcej napiszesz o przestrzeni, o tym, gdzie się znajduje i jak ma działać, tym konkretniejsza będzie moja odpowiedź.</p>
+      <div class="mail">
+        <code id="mail">studio@stankiewicz.design</code>
+        <button type="button" id="copy">Kopiuj</button>
+      </div>
+      <a class="phone" href="tel:+31639283666">+31 6 39 28 36 66</a>
+      <div class="social">
+        <a href="https://www.instagram.com/stankiewiczdesign">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61581186960442">Facebook</a>
+        <a href="https://www.tiktok.com/@stankiewiczdesign">TikTok</a>
+        <a href="https://www.pinterest.com/StankiewiczDesign/">Pinterest</a>
+      </div>
+    </div>
+    <form id="form" action="../kontakt.php" method="POST">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field"><label class="label" for="f-name">Imię</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label class="label" for="f-type">Typ projektu</label>
+        <select id="f-type" name="type"><option>Projekt koncepcyjny wnętrza</option><option>Wizualizacje 3D premium</option><option>Moodboard i kierunek materiałowy</option><option>Prezentacja filmowa</option></select></div>
+      <div class="field"><label class="label" for="f-msg">Wiadomość</label><textarea id="f-msg" name="message" required></textarea></div>
+      <button class="btn solid" type="submit" id="send">Wyślij wiadomość</button>
+      <p class="note" id="form-note" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="wrap news">
+    <div>
+      <p class="label">Newsletter</p>
+      <h2>Nowe projekty i wolne terminy, prosto na Twoją skrzynkę.</h2>
+      <p class="lead">Kilka wiadomości w roku: nowe realizacje, wolne terminy i krótkie notatki o materiałach i świetle. Bez spamu.</p>
+    </div>
+    <form id="nl" action="../newsletter.php" method="POST">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="row2"><label class="hp" for="nl-mail">E-mail</label><input id="nl-mail" name="email" type="email" autocomplete="email" placeholder="you@email.com" required><button class="btn solid" type="submit" id="nl-send">Zapisz się</button></div>
+      <label class="consent"><input type="checkbox" name="consent" value="1" required><span>Zgadzam się na otrzymywanie wiadomości od Stankiewicz Design. Mogę wypisać się w każdej chwili, odpowiadając na dowolną wiadomość.</span></label>
+      <p class="note" id="nl-note" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap"><span class="label">© 2026 Stankiewicz Design · Nijmegen, pracuję na całym świecie</span><div class="foot-links"><a class="label" href="../pl/projekty/">Projekty</a><a class="label" href="../pl/projektowanie-wnetrz/">Projektowanie wnętrz</a><a class="label" href="../pl/wizualizacje-3d/">Wizualizacje 3D</a><a class="label" href="#top">Na górę ↑</a></div></div></footer>
+<div class="done" id="done" role="status" aria-live="polite"></div>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
