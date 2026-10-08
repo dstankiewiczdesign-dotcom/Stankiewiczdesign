@@ -9,6 +9,8 @@ description, canonical and hreflang pair, and sitemap.xml lists them all.
                                             index.html (for the file-based preview)
 """
 import html, json, os, sys, datetime
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cases import CASES, HEADINGS
 
 SITE = "https://stankiewicz.design/"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -523,6 +525,7 @@ def project_page(lang, i):
     mw, mh = img_size(f"images/projects/{p['slug']}/moodboard.jpg")
     gallery += f'<img class="wide" src="{asset("images/projects/%s/moodboard.jpg" % p["slug"], here)}" alt="Moodboard: {e(t["name"])}" loading="lazy" width="{mw}" height="{mh}">'
     chips = lambda xs: "".join(f"<span>{e(x)}</span>" for x in xs)
+    case_html = "".join(f'<section><div class="wrap head" style="margin-bottom:0"><h2 class="label">{e(h)}</h2><div class="prose"><p>{e(x)}</p></div></div></section>\n' for h, x in zip(HEADINGS[lang], CASES[p["slug"]][lang]))
     prev, nxt = PROJECTS[i - 1], PROJECTS[(i + 1) % len(PROJECTS)]
     svc = "interior" if i != 1 else "viz"
     svc_name = dict(u["nav"])[svc]
@@ -543,7 +546,7 @@ def project_page(lang, i):
     <div><span class="label">{u['service_of']}</span><p style="margin-top:10px"><a href="{link(svc, lang, here)}">{e(svc_name)} →</a></p></div>
   </div>
 </div></section>
-<section><div class="wrap">
+{case_html}<section><div class="wrap">
   <div class="head"><p class="label">{u['gallery']}</p><h2>{e(t['name'])}</h2></div>
   <div class="gallery">{gallery}</div>
 </div></section>
