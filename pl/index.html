@@ -68,7 +68,8 @@
 <nav>
   <div class="wrap">
     <a class="brand" href="#top">Stankiewicz Design</a>
-    <div class="links">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <div class="links" id="menu">
       <a href="../pl/projekty/">Projekty</a>
       <a href="../pl/projektowanie-wnetrz/">Projektowanie wnętrz</a>
       <a href="../pl/wizualizacje-3d/">Wizualizacje 3D</a>
@@ -183,7 +184,7 @@
       <div class="field"><label class="label" for="f-name">Imię</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label class="label" for="f-type">Typ projektu</label>
-        <select id="f-type" name="type"><option>Projekt koncepcyjny wnętrza</option><option>Wizualizacje 3D premium</option><option>Moodboard i kierunek materiałowy</option><option>Prezentacja filmowa</option></select></div>
+        <select id="f-type" name="type"><option selected>Projekt koncepcyjny wnętrza</option><option>Wizualizacje 3D premium</option><option>Moodboard i kierunek materiałowy</option><option>Prezentacja filmowa</option></select></div>
       <div class="field"><label class="label" for="f-msg">Wiadomość</label><textarea id="f-msg" name="message" required></textarea></div>
       <button class="btn solid" type="submit" id="send">Wyślij wiadomość</button>
       <p class="note" id="form-note" aria-live="polite"></p>

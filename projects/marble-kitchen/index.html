@@ -31,7 +31,8 @@
 <nav>
   <div class="wrap">
     <a class="brand" href="../../">Stankiewicz Design</a>
-    <div class="links">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <div class="links" id="menu">
       <a href="../../projects/" aria-current="page">Projects</a>
       <a href="../../interior-design/">Interior design</a>
       <a href="../../3d-visualization/">3D visualization</a>
@@ -59,7 +60,7 @@
 </div></section>
 <section><div class="wrap">
   <div class="head"><p class="label">Gallery</p><h2>Marble Kitchen</h2></div>
-  <div class="gallery"><img src="../../images/projects/marble-kitchen/visual-02.jpg" alt="Marble Kitchen, view 2" loading="lazy" width="1402" height="1122"><img src="../../images/projects/marble-kitchen/visual-03.jpg" alt="Marble Kitchen, view 3" loading="lazy" width="1402" height="1122"><img src="../../images/projects/marble-kitchen/visual-04.jpg" alt="Marble Kitchen, view 4" loading="lazy" width="1402" height="1122"><img src="../../images/projects/marble-kitchen/visual-05.jpg" alt="Marble Kitchen, view 5" loading="lazy" width="1402" height="1122"><img class="wide" src="../../images/projects/marble-kitchen/moodboard.jpg" alt="Moodboard: Marble Kitchen" loading="lazy"></div>
+  <div class="gallery"><img src="../../images/projects/marble-kitchen/visual-02.jpg" alt="Marble Kitchen, view 2" loading="lazy" width="1402" height="1122"><img src="../../images/projects/marble-kitchen/visual-03.jpg" alt="Marble Kitchen, view 3" loading="lazy" width="1402" height="1122"><img src="../../images/projects/marble-kitchen/visual-04.jpg" alt="Marble Kitchen, view 4" loading="lazy" width="1402" height="1122"><img src="../../images/projects/marble-kitchen/visual-05.jpg" alt="Marble Kitchen, view 5" loading="lazy" width="1402" height="1122"><img class="wide" src="../../images/projects/marble-kitchen/moodboard.jpg" alt="Moodboard: Marble Kitchen" loading="lazy" width="1122" height="1402"></div>
 </div></section>
 <section><div class="wrap pnav">
   <a href="../../projects/blue-kitchen/"><span class="label">← Previous</span><h3>Blue Kitchen</h3></a>
@@ -88,7 +89,7 @@
       <div class="field"><label class="label" for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label class="label" for="f-type">Project type</label>
-        <select id="f-type" name="type"><option>Interior concept</option><option>Premium 3D visualization</option><option>Moodboard &amp; material direction</option><option>Cinematic presentation</option></select></div>
+        <select id="f-type" name="type"><option selected>Interior concept</option><option>Premium 3D visualization</option><option>Moodboard &amp; material direction</option><option>Cinematic presentation</option></select></div>
       <div class="field"><label class="label" for="f-msg">Message</label><textarea id="f-msg" name="message" required></textarea></div>
       <button class="btn solid" type="submit" id="send">Send message</button>
       <p class="note" id="form-note" aria-live="polite"></p>

@@ -31,7 +31,17 @@ nav .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .lang button{all:unset;cursor:pointer;font:400 11px/1 var(--mono);letter-spacing:.12em;padding:7px 11px;color:var(--concrete)}
 .lang button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
-@media (max-width:720px){.links{display:none}}
+.menu-btn{display:none}
+@media (max-width:720px){
+  .menu-btn{all:unset;cursor:pointer;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--line);color:var(--paper)}
+  .menu-btn:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:rgba(10,10,11,.97);border-bottom:1px solid var(--line);padding:8px var(--pad) 16px}
+  .links a{font-size:18px;padding:14px 0;border-bottom:1px solid var(--line);background:none;color:var(--paper)}
+  nav.open .links{display:flex}
+  nav.open{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--ink)}
+  .links{background:var(--ink)}
+  nav .wrap{gap:12px}
+}
 
 /* hero */
 .hero{position:relative;min-height:min(86vh,820px);display:grid;align-items:end;overflow:hidden}
@@ -228,3 +238,7 @@ dialog::backdrop{background:rgba(10,10,11,.86)}
 .foot-links{display:flex;gap:20px;flex-wrap:wrap}
 .foot-links a{text-decoration:none}
 .foot-links a:hover{color:var(--paper)}
+
+/* section titles that are headings but look like the small labels */
+h2.label,.head h2.label{font:400 11px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt-text)}
+@media (max-width:420px){.brand{letter-spacing:.12em;font-size:12px;white-space:nowrap}}

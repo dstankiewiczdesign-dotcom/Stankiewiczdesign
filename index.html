@@ -68,7 +68,8 @@
 <nav>
   <div class="wrap">
     <a class="brand" href="#top">Stankiewicz Design</a>
-    <div class="links">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <div class="links" id="menu">
       <a href="projects/">Projects</a>
       <a href="interior-design/">Interior design</a>
       <a href="3d-visualization/">3D visualization</a>
@@ -183,7 +184,7 @@
       <div class="field"><label class="label" for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
       <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label class="label" for="f-type">Project type</label>
-        <select id="f-type" name="type"><option>Interior concept</option><option>Premium 3D visualization</option><option>Moodboard &amp; material direction</option><option>Cinematic presentation</option></select></div>
+        <select id="f-type" name="type"><option selected>Interior concept</option><option>Premium 3D visualization</option><option>Moodboard &amp; material direction</option><option>Cinematic presentation</option></select></div>
       <div class="field"><label class="label" for="f-msg">Message</label><textarea id="f-msg" name="message" required></textarea></div>
       <button class="btn solid" type="submit" id="send">Send message</button>
       <p class="note" id="form-note" aria-live="polite"></p>

@@ -45,7 +45,7 @@ for p in PROJECTS:
 T = {
 "en": dict(
   nav=[("projects","Projects"),("interior","Interior design"),("viz","3D visualization"),("#about","About"),("#contact","Contact")],
-  lang_label="Language", home_crumb="Home", more="View project →", mat="Material palette", mood="Mood", gallery="Gallery",
+  lang_label="Language", menu="Menu", home_crumb="Home", more="View project →", mat="Material palette", mood="Mood", gallery="Gallery",
   back_projects="All projects", prev="Previous", next="Next", top="Back to top ↑", footer="© 2026 Stankiewicz Design · Nijmegen, working worldwide",
   cta_discuss="Discuss your project", cta_projects="Explore projects", related="Selected projects", service_of="Related service",
   # home
@@ -76,7 +76,7 @@ T = {
 ),
 "pl": dict(
   nav=[("projects","Projekty"),("interior","Projektowanie wnętrz"),("viz","Wizualizacje 3D"),("#about","O mnie"),("#contact","Kontakt")],
-  lang_label="Język", home_crumb="Start", more="Zobacz projekt →", mat="Paleta materiałowa", mood="Nastrój", gallery="Galeria",
+  lang_label="Język", menu="Menu", home_crumb="Start", more="Zobacz projekt →", mat="Paleta materiałowa", mood="Nastrój", gallery="Galeria",
   back_projects="Wszystkie projekty", prev="Poprzedni", next="Następny", top="Na górę ↑", footer="© 2026 Stankiewicz Design · Nijmegen, pracuję na całym świecie",
   cta_discuss="Porozmawiajmy o projekcie", cta_projects="Zobacz projekty", related="Wybrane projekty", service_of="Powiązana usługa",
   hero_label="Projektowanie wnętrz · Wizualizacje 3D · Europa i świat",
@@ -184,6 +184,18 @@ PAGE_META = {
 }
 
 # ---------------------------------------------------------------- helpers
+def img_size(path):
+    """Pixel size of a JPEG, read from its SOF marker (no image library needed)."""
+    import struct
+    with open(os.path.join(ROOT, path), "rb") as f:
+        f.read(2)
+        while True:
+            m, ln = struct.unpack(">2sH", f.read(4))
+            if m[1] in (0xC0, 0xC1, 0xC2):
+                h, w = struct.unpack(">xHH", f.read(5))
+                return w, h
+            f.seek(ln - 2, 1)
+
 PREVIEW = False
 
 def rel(target, here):
@@ -294,7 +306,8 @@ def nav(lang, key, here):
     return f"""<nav>
   <div class="wrap">
     <a class="brand" href="{brand}">Stankiewicz Design</a>
-    <div class="links">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">{t['menu']}</button>
+    <div class="links" id="menu">
       {chr(10).join('      ' + i for i in items).strip()}
     </div>
     <div class="lang" role="group" aria-label="{t['lang_label']}">{sw}</div>
@@ -329,9 +342,9 @@ def rows(items, numbered=True, links=None, lang=None, here=None):
         out.append(f'<div class="row"><span class="label">{num}</span><h3>{h}</h3><p>{e(text)}</p></div>')
     return '<div class="rows">' + "".join(out) + "</div>"
 
-def contact_section(lang, here):
+def contact_section(lang, here, selected=0):
     t = T[lang]
-    opts = "".join(f"<option>{e(o[0])}</option>" for o in t["offer"])
+    opts = "".join(f"<option{' selected' if i == selected else ''}>{e(o[0])}</option>" for i, o in enumerate(t["offer"]))
     return f"""<section id="contact">
   <div class="wrap contact">
     <div>
@@ -507,7 +520,8 @@ def project_page(lang, i):
     trail = [("projects", dict(u["nav"])["projects"]), (key, t["name"])]
     img = lambda k: asset(f"images/projects/{p['slug']}/visual-0{k}.jpg", here)
     gallery = "".join(f'<img src="{img(k)}" alt="{e(t["name"])}, {u["view"]} {k}" loading="lazy" width="1402" height="1122">' for k in range(2, p["n"] + 1))
-    gallery += f'<img class="wide" src="{asset("images/projects/%s/moodboard.jpg" % p["slug"], here)}" alt="Moodboard: {e(t["name"])}" loading="lazy">'
+    mw, mh = img_size(f"images/projects/{p['slug']}/moodboard.jpg")
+    gallery += f'<img class="wide" src="{asset("images/projects/%s/moodboard.jpg" % p["slug"], here)}" alt="Moodboard: {e(t["name"])}" loading="lazy" width="{mw}" height="{mh}">'
     chips = lambda xs: "".join(f"<span>{e(x)}</span>" for x in xs)
     prev, nxt = PROJECTS[i - 1], PROJECTS[(i + 1) % len(PROJECTS)]
     svc = "interior" if i != 1 else "viz"
@@ -549,9 +563,9 @@ def service_page(lang, key):
                 inner = '<ul class="list">' + "".join(f"<li><strong>{e(a)}</strong><span>{e(b)}</span></li>" for a, b in c["includes"]) + "</ul>"
             else:
                 inner = rows(c.get("how") or u["steps"])
-            blocks.append(f'<section><div class="wrap"><div class="head"><p class="label">{e(heading)}</p><div></div></div>{inner}</div></section>')
+            blocks.append(f'<section><div class="wrap"><div class="head"><h2 class="label">{e(heading)}</h2><div></div></div>{inner}</div></section>')
         else:
-            blocks.append(f'<section><div class="wrap head" style="margin-bottom:0"><p class="label">{e(heading)}</p><div class="prose">{body}</div></div></section>')
+            blocks.append(f'<section><div class="wrap head" style="margin-bottom:0"><h2 class="label">{e(heading)}</h2><div class="prose">{body}</div></div></section>')
     grid = "".join(card(p, lang, here) for p in PROJECTS if p["slug"] in s["projects"][:2])
     ld = {"@context":"https://schema.org","@type":"Service","name":c["h1"],"serviceType":c["h1"],"description":c["desc"],"areaServed":"Worldwide","inLanguage":lang,"provider":{"@type":"Organization","name":"Stankiewicz Design","url":SITE},"url":SITE+here}
     return (head(lang, key, c["title"], c["desc"], here, img=s["img"]) + jsonld(ld) + crumb_ld(lang, trail) + f'</head>\n<body data-root="{asset("", here)}">\n' + nav(lang, key, here) + f"""
@@ -568,7 +582,7 @@ def service_page(lang, key):
   <div class="head"><p class="label">{e(u['related'])}</p><div></div></div>
   <div class="grid">{grid}</div>
 </div></section>
-""" + contact_section(lang, here) + footer(lang, here) + page_end(here))
+""" + contact_section(lang, here, 1 if key == "viz" else 0) + footer(lang, here) + page_end(here))
 
 # ---------------------------------------------------------------- write
 def build(out):

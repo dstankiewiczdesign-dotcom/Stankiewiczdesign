@@ -6,6 +6,14 @@ const root=document.body.dataset.root||"";
 const UI={pl:{copied:"Skopiowano",sending:"Wysyłam…",done:"Wysłane",subscribed:"Zapisane",fail_nl:"Nie udało się zapisać. Spróbuj ponownie za chwilę.",ig_empty:"Posty z Instagrama pojawią się tutaj.",ig_alt:"Post na Instagramie",fail:"Nie udało się wysłać. Otwieram Twój program pocztowy z gotową wiadomością.",subject:"Zapytanie ze strony: "},
 en:{copied:"Copied",sending:"Sending…",done:"Sent",subscribed:"Subscribed",fail_nl:"Could not subscribe. Please try again in a moment.",ig_empty:"Instagram posts will appear here.",ig_alt:"Instagram post",fail:"Could not send. Opening your mail app with the message ready.",subject:"Enquiry from the website: "}}[lang];
 const done=document.getElementById("done");
+/* mobile menu */
+const navEl=document.querySelector("nav"),menuBtn=document.querySelector(".menu-btn");
+if(menuBtn){
+  const setOpen=o=>{navEl.classList.toggle("open",o);menuBtn.setAttribute("aria-expanded",o)};
+  menuBtn.onclick=()=>setOpen(!navEl.classList.contains("open"));
+  document.getElementById("menu").addEventListener("click",e=>{if(e.target.closest("a"))setOpen(false)});
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&navEl.classList.contains("open")){setOpen(false);menuBtn.focus()}});
+}
 function flash(text){if(!done)return;done.textContent=text;done.classList.add("on");setTimeout(()=>done.classList.remove("on"),2600)}
 
 const copy=document.getElementById("copy");
@@ -63,7 +71,7 @@ if(box){
   dots.innerHTML=S.map(s=>`<button type="button" aria-label="${s.name}"></button>`).join("");
   let cur=0,timer;
   const show=i=>{
-    addSlides();const imgs=box.children,bs=dots.children;
+    if(i!==0)addSlides();const imgs=box.children,bs=dots.children;
     imgs[cur].classList.remove("on");bs[cur].classList.remove("on");
     cur=(i+S.length)%S.length;imgs[cur].classList.add("on");void bs[cur].offsetWidth;bs[cur].classList.add("on");
     sname.textContent=S[cur].name;
