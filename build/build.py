@@ -46,64 +46,58 @@ for p in PROJECTS:
 # ---------------------------------------------------------------- shared texts
 T = {
 "en": dict(
-  nav=[("projects","Projects"),("interior","Interior design"),("viz","3D visualization"),("#about","About"),("#contact","Contact")],
-  lang_label="Language", menu="Menu", home_crumb="Home", more="View project →", mat="Material palette", mood="Mood", gallery="Gallery",
-  back_projects="All projects", prev="Previous", next="Next", top="Back to top ↑", footer="© 2026 Stankiewicz Design · Nijmegen, working worldwide",
-  cta_discuss="Discuss your project", cta_projects="Explore projects", related="Selected projects", service_of="Related service",
+  nav=[("projects","Projects"),("#studio","Studio"),("#contact","Contact")],
+  svc={"interior":"Interior design","viz":"3D visualization"},
+  lang_label="Language", menu="Menu", skip="Skip to content", home_crumb="Home", mat="Material palette", mood="Mood", gallery="Gallery",
+  prev="Previous", next="Next", top="Back to top ↑", footer="© 2026 Stankiewicz Design · Nijmegen",
+  cta_discuss="Discuss your project", cta_projects="View projects", related="Selected projects", service_of="Related service",
   # home
-  hero_label="Interior design · 3D visualization · Europe & worldwide",
-  hero_sub="Interior design & 3D visualization studio. Light, material, proportion, silence.",
-  cta_contact="Describe your space",
-  ph_label="Philosophy", ph_title="An interior does not begin with furniture. It begins with a mood that is meant to stay.",
-  principles=[("Atmosphere","Before the furniture comes the mood. That is what stays in the head long after leaving the room."),("Material","Stone, concrete, steel and wood pretend to be nothing else. Their weight and texture carry everything."),("Light","One direction instead of even brightness. Shadow here is a material, not an absence of light."),("Composition","Proportion, axis and emptiness. What is missing from the frame works as hard as what stands in it.")],
-  ph1="I design through light, material, silence and proportion. Not by adding more, but by removing what is not needed and placing what remains exactly where it belongs.",
-  ph2="A visualization here is not a product catalogue. It is an attempt to show how a space will feel at a given hour of the day, before anyone drives the first nail into a wall.",
-  pf_title="Four interior concepts, each built on a single decision.",
-  of_label="Scope of work", of_title="From concept to the frame that sells the space.",
-  offer=[("Interior concept","Layout, proportion, materials and light. A complete concept ready for contractor pricing.","interior"),("Premium 3D visualization","Realistic frames with cinematic light. Not a furniture presentation, but the atmosphere of a space.","viz"),("Moodboard & material direction","A rendered scene with material samples. A direction you can see before the project begins.","interior"),("Cinematic presentation","A sequence of frames for a development or a portfolio. Material that sells the space, not the floor plan.","viz")],
-  pr_label="Process", pr_title="Four steps. You see the atmosphere before the first plan exists.",
-  steps=[("Brief","We talk about the space, the way you live and what is meant to stay in your head. Without this, the rest is guesswork."),("Direction","Moodboard and material direction. You see the atmosphere before the first plan exists."),("Visualize","Visualizations in the final light. We check proportion and materials on frames, not on samples."),("Present","A complete set of materials and documentation. I also help choose contractors and material sources.")],
-  ab_label="About", ab_title="An author-led studio, not an agency.",
-  ab1="Stankiewicz Design is an author-led interior design and 3D visualization studio focused on atmospheric, mood-led spaces. I create interiors that are not only seen, but felt before they are built. My work is based on light, material, proportion, silence and cinematic composition.",
-  ab2="Based in Nijmegen, working with clients across Europe and worldwide.",
-  portrait_alt="Damian Stankiewicz, interior designer",
+  hero_kicker="Stankiewicz Design · Studio",
+  hero_h1="Interior design & 3D visualization",
+  hero_lead="Before it’s built, it’s felt. Calm, material-led interiors and cinematic visualizations for clients across Europe and worldwide.",
   hero_alt="Apartment interior with concrete and a black volume in directional light",
-  ig_title="Latest frames from the studio.", ig_more="Follow @stankiewiczdesign",
-  ct_label="Contact", ct_title="Describe the space you have in mind.",
-  ct_lead="I answer every message personally. The more you write about the space, where it is and how it should work, the more concrete my answer will be.",
-  copy="Copy", f_name="Name", f_type="Project type", f_msg="Message", f_send="Send message",
-  nl_title="New projects and open dates, straight to your inbox.", nl_lead="A few messages a year: new work, open dates and short notes on materials and light. No spam.",
-  nl_send="Subscribe", nl_consent="I agree to receive messages from Stankiewicz Design. I can unsubscribe at any time by replying to any message.",
+  cta_contact="Get in touch",
+  pf_label="Projects", pf_h2="Selected projects", all_projects="All projects",
+  pf_title="Four interior concepts, each built on a single decision.",
+  of_label="Services", of_h2="What I do",
+  offer=[("Interior design","Layout, materials and light brought together in one concept, ready for pricing.","interior"),("3D visualizations","Realistic frames that show how a space will feel before it is built.","viz"),("Material direction","A rendered moodboard of stone, wood and metal chosen together.","interior"),("Cinematic presentations","A sequence of frames for a development or a portfolio.","viz")],
+  pr_label="Process", pr_h2="Three steps",
+  steps=[("Conversation & brief","We talk about the space, the way you live and the mood it should hold."),("Concept","Layout, material direction and light, agreed before anything is rendered."),("Visualization","Frames in the final light, so you see the space before it is built.")],
+  ab_label="Studio", ab_h2="Damian Stankiewicz",
+  ab1="I run an author-led studio for interior design and 3D visualization. My work is built on light, material and proportion, and on removing what the space does not need.",
+  ab2="Based in Nijmegen, the Netherlands. Working with clients across Europe and worldwide.",
+  portrait_alt="Damian Stankiewicz, interior designer",
+  ct_label="Contact", ct_title="Tell me about your space.",
+  ct_lead="I reply to every message personally. A few words about the space, where it is and how it should work are enough to start.",
+  email="E-mail", phone="Phone", studio="Studio", city="Nijmegen, the Netherlands",
+  copy="Copy", f_name="Name", f_mail="E-mail", f_type="Project type", f_msg="Message", f_send="Send message",
   view="view",
 ),
 "pl": dict(
-  nav=[("projects","Projekty"),("interior","Projektowanie wnętrz"),("viz","Wizualizacje 3D"),("#about","O mnie"),("#contact","Kontakt")],
-  lang_label="Język", menu="Menu", home_crumb="Start", more="Zobacz projekt →", mat="Paleta materiałowa", mood="Nastrój", gallery="Galeria",
-  back_projects="Wszystkie projekty", prev="Poprzedni", next="Następny", top="Na górę ↑", footer="© 2026 Stankiewicz Design · Nijmegen, pracuję na całym świecie",
+  nav=[("projects","Projekty"),("#studio","Studio"),("#contact","Kontakt")],
+  svc={"interior":"Projektowanie wnętrz","viz":"Wizualizacje 3D"},
+  lang_label="Język", menu="Menu", skip="Przejdź do treści", home_crumb="Start", mat="Paleta materiałowa", mood="Nastrój", gallery="Galeria",
+  prev="Poprzedni", next="Następny", top="Na górę ↑", footer="© 2026 Stankiewicz Design · Nijmegen",
   cta_discuss="Porozmawiajmy o projekcie", cta_projects="Zobacz projekty", related="Wybrane projekty", service_of="Powiązana usługa",
-  hero_label="Projektowanie wnętrz · Wizualizacje 3D · Europa i świat",
-  hero_sub="Studio projektowania wnętrz i wizualizacji 3D. Światło, materiał, proporcja, cisza.",
-  cta_contact="Opisz swoją przestrzeń",
-  ph_label="Filozofia", ph_title="Wnętrze nie zaczyna się od mebla. Zaczyna się od nastroju, który ma zostać w głowie.",
-  principles=[("Atmosfera","Zanim pojawi się mebel, pojawia się nastrój. To on zostaje w głowie długo po wyjściu z pomieszczenia."),("Materiał","Kamień, beton, stal i drewno nie udają niczego innego. Ich ciężar i faktura niosą całą resztę."),("Światło","Jeden kierunek zamiast równomiernego rozjaśnienia. Cień jest tu materiałem, nie brakiem światła."),("Kompozycja","Proporcja, oś i pustka. To, czego nie ma w kadrze, pracuje tak samo mocno jak to, co w nim stoi.")],
-  ph1="Projektuję przez światło, materiał, ciszę i proporcję. Nie przez dodawanie kolejnych elementów, tylko przez usuwanie tego, co nie jest potrzebne, i ustawienie tego, co zostaje, we właściwym miejscu.",
-  ph2="Wizualizacja nie jest tu katalogiem produktów. Jest próbą pokazania, jak przestrzeń będzie się czuć o określonej porze dnia, zanim ktokolwiek wbije w ścianę pierwszy kołek.",
-  pf_title="Cztery koncepcje wnętrz, każda zbudowana na jednej decyzji.",
-  of_label="Zakres pracy", of_title="Od koncepcji do kadru, który sprzedaje przestrzeń.",
-  offer=[("Projekt koncepcyjny wnętrza","Układ, proporcje, materiały i światło. Kompletna koncepcja gotowa do wyceny wykonawczej.","interior"),("Wizualizacje 3D premium","Realistyczne kadry o filmowym świetle. Nie prezentacja mebli, tylko atmosfera przestrzeni.","viz"),("Moodboard i kierunek materiałowy","Wyrenderowana scena z próbkami materiałów. Kierunek, który widać, zanim zacznie się projekt.","interior"),("Prezentacja filmowa","Sekwencja kadrów pod inwestycję albo portfolio. Materiał, który sprzedaje przestrzeń, nie rzut.","viz")],
-  pr_label="Proces", pr_title="Cztery kroki. Atmosferę widzisz, zanim powstanie pierwszy rzut.",
-  steps=[("Brief","Rozmawiamy o przestrzeni, stylu życia i o tym, co ma zostać w głowie. Bez tego reszta jest zgadywaniem."),("Kierunek","Moodboard i kierunek materiałowy. Widzisz atmosferę, zanim powstanie pierwszy rzut."),("Wizualizacja","Wizualizacje w docelowym świetle. Sprawdzamy proporcje i materiały na kadrach, nie na próbkach."),("Prezentacja","Komplet materiałów i dokumentacji. Pomagam też dobrać wykonawcę i źródła materiałów.")],
-  ab_label="O mnie", ab_title="Autorskie studio, nie agencja.",
-  ab1="Stankiewicz Design to autorskie studio projektowania wnętrz i wizualizacji 3D. Tworzę przestrzenie, które mają nie tylko dobrze wyglądać, ale budować nastrój, napięcie i emocjonalny odbiór. W mojej pracy najważniejsze są światło, materiał, proporcje, cisza i kompozycja.",
-  ab2="Nijmegen. Pracuję z klientami z całej Europy i świata.",
-  portrait_alt="Damian Stankiewicz, projektant wnętrz",
+  hero_kicker="Stankiewicz Design · Studio",
+  hero_h1="Projektowanie wnętrz i wizualizacje 3D",
+  hero_lead="Zanim powstanie, już je czujesz. Spokojne wnętrza oparte na materiale i filmowe wizualizacje dla klientów z Europy i świata.",
   hero_alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle",
-  ig_title="Najnowsze kadry z pracowni.", ig_more="Obserwuj @stankiewiczdesign",
-  ct_label="Kontakt", ct_title="Opisz przestrzeń, którą masz w głowie.",
-  ct_lead="Odpowiadam na każdą wiadomość osobiście. Im więcej napiszesz o przestrzeni, o tym, gdzie się znajduje i jak ma działać, tym konkretniejsza będzie moja odpowiedź.",
-  copy="Kopiuj", f_name="Imię", f_type="Typ projektu", f_msg="Wiadomość", f_send="Wyślij wiadomość",
-  nl_title="Nowe projekty i wolne terminy, prosto na Twoją skrzynkę.", nl_lead="Kilka wiadomości w roku: nowe realizacje, wolne terminy i krótkie notatki o materiałach i świetle. Bez spamu.",
-  nl_send="Zapisz się", nl_consent="Zgadzam się na otrzymywanie wiadomości od Stankiewicz Design. Mogę wypisać się w każdej chwili, odpowiadając na dowolną wiadomość.",
+  cta_contact="Napisz do mnie",
+  pf_label="Projekty", pf_h2="Wybrane projekty", all_projects="Wszystkie projekty",
+  pf_title="Cztery koncepcje wnętrz, każda zbudowana na jednej decyzji.",
+  of_label="Oferta", of_h2="Czym się zajmuję",
+  offer=[("Projektowanie wnętrz","Układ, materiały i światło zebrane w jedną koncepcję gotową do wyceny.","interior"),("Wizualizacje 3D","Realistyczne kadry, które pokazują, jak przestrzeń będzie się czuć, zanim powstanie.","viz"),("Kierunek materiałowy","Wyrenderowany moodboard z kamieniem, drewnem i metalem dobranymi razem.","interior"),("Prezentacje filmowe","Sekwencja kadrów pod inwestycję albo portfolio.","viz")],
+  pr_label="Proces", pr_h2="Trzy kroki",
+  steps=[("Rozmowa i brief","Rozmawiamy o przestrzeni, Twoim stylu życia i nastroju, jaki ma mieć wnętrze."),("Koncepcja","Układ, kierunek materiałowy i światło, uzgodnione przed renderingiem."),("Wizualizacja","Kadry w docelowym świetle: widzisz przestrzeń, zanim powstanie.")],
+  ab_label="Studio", ab_h2="Damian Stankiewicz",
+  ab1="Prowadzę autorskie studio projektowania wnętrz i wizualizacji 3D. Moja praca opiera się na świetle, materiale i proporcji oraz na usuwaniu tego, czego przestrzeń nie potrzebuje.",
+  ab2="Siedziba w Nijmegen w Holandii. Pracuję z klientami z całej Europy i świata.",
+  portrait_alt="Damian Stankiewicz, projektant wnętrz",
+  ct_label="Kontakt", ct_title="Opowiedz o swojej przestrzeni.",
+  ct_lead="Odpowiadam osobiście na każdą wiadomość. Na start wystarczy kilka słów o przestrzeni, gdzie się znajduje i jak ma działać.",
+  email="E-mail", phone="Telefon", studio="Pracownia", city="Nijmegen, Holandia",
+  copy="Kopiuj", f_name="Imię", f_mail="E-mail", f_type="Typ projektu", f_msg="Wiadomość", f_send="Wyślij wiadomość",
   view="kadr",
 ),
 }
@@ -126,6 +120,7 @@ SERVICES = {
    ("What affects price and timing", "<p>The size of the space, the number of rooms, how many views you want visualized and the level of detail. Every project gets an individual quote after the first conversation, so tell me as much as you can about the space when you get in touch.</p>"),
   ],
   includes=[("Layout and proportion","How the space is divided and how you move through it."),("Material palette","Stone, wood, metal and textiles chosen together, shown as a rendered moodboard."),("Lighting concept","Where the light comes from, at what hour, and what it does to the materials."),("Visualizations of key views","Realistic frames of the most important parts of the space in the final light."),("A concept ready for pricing","A complete set of materials you can take to a contractor, plus help in choosing contractors and material sources.")],
+  how=[("Brief","We talk about the space, the way you live and what is meant to stay in your head. Without this, the rest is guesswork."),("Direction","Moodboard and material direction. You see the atmosphere before the first plan exists."),("Visualize","Visualizations in the final light. We check proportion and materials on frames, not on samples."),("Present","A complete set of materials and documentation. I also help choose contractors and material sources.")],
  ),
  "pl": dict(
   title="Projektowanie wnętrz | Stankiewicz Design",
@@ -141,6 +136,7 @@ SERVICES = {
    ("Od czego zależy cena i termin", "<p>Od wielkości przestrzeni, liczby pomieszczeń, liczby kadrów do wizualizacji i poziomu szczegółu. Każdy projekt wyceniam indywidualnie po pierwszej rozmowie, więc w wiadomości opisz przestrzeń jak najdokładniej.</p>"),
   ],
   includes=[("Układ i proporcje","Jak przestrzeń jest podzielona i jak się po niej poruszasz."),("Paleta materiałów","Kamień, drewno, metal i tkaniny dobrane razem, pokazane jako wyrenderowany moodboard."),("Koncepcja światła","Skąd pada światło, o jakiej porze i co robi z materiałami."),("Wizualizacje kluczowych widoków","Realistyczne kadry najważniejszych miejsc w docelowym świetle."),("Koncepcja gotowa do wyceny","Komplet materiałów dla wykonawcy oraz pomoc w doborze wykonawców i źródeł materiałów.")],
+  how=[("Brief","Rozmawiamy o przestrzeni, stylu życia i o tym, co ma zostać w głowie. Bez tego reszta jest zgadywaniem."),("Kierunek","Moodboard i kierunek materiałowy. Widzisz atmosferę, zanim powstanie pierwszy rzut."),("Wizualizacja","Wizualizacje w docelowym świetle. Sprawdzamy proporcje i materiały na kadrach, nie na próbkach."),("Prezentacja","Komplet materiałów i dokumentacji. Pomagam też dobrać wykonawcę i źródła materiałów.")],
  )},
 "viz": {
  "img":"images/projects/blue-kitchen/visual-01.jpg", "projects":["blue-kitchen","apartment-01","marble-bathroom"],
@@ -223,7 +219,7 @@ def head(lang, key, title, desc, here, img="images/og.jpg"):
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-<meta name="theme-color" content="#0A0A0B">
+<meta name="theme-color" content="#0C0D0D">
 <link rel="canonical" href="{url}">
 <link rel="alternate" hreflang="en" href="{SITE + PATHS[key]['en']}">
 <link rel="alternate" hreflang="pl" href="{SITE + PATHS[key]['pl']}">
@@ -240,7 +236,7 @@ def head(lang, key, title, desc, here, img="images/og.jpg"):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600&family=Fraunces:opsz,wght@9..144,300;9..144,400&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400&display=swap">
 <link rel="stylesheet" href="{asset('assets/site.css', here)}">
 """
 
@@ -286,63 +282,66 @@ INTRO = """<div class="intro" id="intro" aria-hidden="true">
   el.addEventListener("click",done);
   /* start only once the page is painted and the font is ready, so phones see the first word */
   let go=false;const start=()=>{if(go)return;go=true;raf=requestAnimationFrame(()=>requestAnimationFrame(frame))};
-  if(document.fonts&&document.fonts.load)document.fonts.load('300 64px "Fraunces"',"Stankiewicz Design").then(start,start);else start();
+  if(document.fonts&&document.fonts.load)document.fonts.load('300 64px "Nunito Sans"',"Stankiewicz Design").then(start,start);else start();
   setTimeout(start,1500);
 })();
 </script>
 """
 
+SOCIAL = [("Instagram","https://www.instagram.com/stankiewiczdesign"),("Facebook","https://www.facebook.com/profile.php?id=61581186960442"),("TikTok","https://www.tiktok.com/@stankiewiczdesign"),("Pinterest","https://www.pinterest.com/StankiewiczDesign/")]
+
+def brand(lang, key, here):
+    href = "#top" if key == "home" else link("home", lang, here)
+    return f'<a class="brand" href="{href}"><img src="{asset("images/logo-mark.png", here)}" width="30" height="30" alt="">Stankiewicz Design</a>'
+
 def nav(lang, key, here):
     t = T[lang]
     items = []
     for k, label in t["nav"]:
-        if k.startswith("#"):
-            href = (k if key == "home" else link("home", lang, here, k))
-            items.append(f'<a href="{href}">{e(label)}</a>')
+        if k == "#contact":
+            href = "#contact"              # every page ends with the contact section
+        elif k.startswith("#"):
+            href = k if key == "home" else link("home", lang, here, k)
         else:
-            cur = ' aria-current="page"' if (k == key or (k == "projects" and key.startswith("p:"))) else ""
-            items.append(f'<a href="{link(k, lang, here)}"{cur}>{e(label)}</a>')
+            href = link(k, lang, here)
+        cur = ' aria-current="page"' if (k == key or (k == "projects" and key.startswith("p:"))) else ""
+        items.append(f'<a href="{href}"{cur}>{e(label)}</a>')
     cur_attr = lambda l: ' aria-current="true"' if l == lang else ""
     sw = "".join(f'<a href="{link(key, l, here)}" hreflang="{l}" lang="{l}"{cur_attr(l)}>{l.upper()}</a>' for l in ("en", "pl"))
-    brand = "#top" if key == "home" else link("home", lang, here)
-    return f"""<nav>
+    return f"""<a class="skip" href="#top">{e(t['skip'])}</a>
+<nav>
   <div class="wrap">
-    <a class="brand" href="{brand}">Stankiewicz Design</a>
+    {brand(lang, key, here)}
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">{t['menu']}</button>
-    <div class="links" id="menu">
-      {chr(10).join('      ' + i for i in items).strip()}
-    </div>
+    <div class="links" id="menu">{''.join(items)}</div>
     <div class="lang" role="group" aria-label="{t['lang_label']}">{sw}</div>
   </div>
 </nav>
 """
 
-def footer(lang, here):
+def footer(lang, key, here):
     t = T[lang]
-    links = "".join(f'<a class="label" href="{link(k, lang, here)}">{e(l)}</a>' for k, l in t["nav"] if not k.startswith("#"))
-    return f"""<footer><div class="wrap"><span class="label">{e(t['footer'])}</span><div class="foot-links">{links}<a class="label" href="#top">{e(t['top'])}</a></div></div></footer>
+    social = "".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in SOCIAL)
+    links = f'<a href="{link("projects", lang, here)}">{e(dict(t["nav"])["projects"])}</a>' + "".join(f'<a href="{link(k, lang, here)}">{e(v)}</a>' for k, v in t["svc"].items())
+    return f"""<footer><div class="wrap">
+  <div class="foot-top">{brand(lang, key, here)}<div class="social">{social}</div><a class="text-link" href="#top">{e(t['top'])}</a></div>
+  <div class="foot-bottom"><p class="small">{e(t['footer'])}</p><div class="foot-links">{links}</div></div>
+</div></footer>
 <div class="done" id="done" role="status" aria-live="polite"></div>
 """
 
 def page_end(here):
     return f'<script src="{asset("assets/site.js", here)}" defer></script>\n</body>\n</html>\n'
 
-def card(p, lang, here):
+def card(p, lang, here, short=False):
     t = p[lang]
+    text = f'<p>{e(t["short"])}</p>' if short else ""
     return (f'<a class="proj" href="{link("p:"+p["slug"], lang, here)}"><div class="frame">'
             f'<img src="{asset("images/projects/%s/visual-01.jpg" % p["slug"], here)}" width="1402" height="1122" alt="{e(t["name"])}: {e(t["short"])}" loading="lazy"></div>'
-            f'<span class="label">{e(t["type"])}</span><h3>{e(t["name"])}</h3><p>{e(t["short"])}</p><span class="more">{e(T[lang]["more"])}</span></a>')
+            f'<div class="proj-name"><h3>{e(t["name"])}</h3><span class="label">{e(t["type"])}</span></div>{text}</a>')
 
-def rows(items, numbered=True, links=None, lang=None, here=None):
-    out = []
-    for i, it in enumerate(items):
-        title, text = it[0], it[1]
-        num = f"{i+1:02d}" if numbered else "ABCD"[i]
-        h = e(title)
-        if links and len(it) > 2:
-            h = f'<a href="{link(it[2], lang, here)}">{h}</a>'
-        out.append(f'<div class="row"><span class="label">{num}</span><h3>{h}</h3><p>{e(text)}</p></div>')
-    return '<div class="rows">' + "".join(out) + "</div>"
+def rows(items):
+    return '<div class="rows">' + "".join(f'<div class="row"><span class="label">{i+1:02d}</span><h3>{e(a)}</h3><p>{e(b)}</p></div>' for i, (a, b) in enumerate(items)) + "</div>"
 
 def contact_section(lang, here, selected=0):
     t = T[lang]
@@ -353,27 +352,21 @@ def contact_section(lang, here, selected=0):
       <p class="label">{t['ct_label']}</p>
       <h2>{e(t['ct_title'])}</h2>
       <p class="lead">{e(t['ct_lead'])}</p>
-      <div class="mail">
-        <code id="mail">studio@stankiewicz.design</code>
-        <button type="button" id="copy">{t['copy']}</button>
-      </div>
-      <a class="phone" href="tel:+31639283666">+31 6 39 28 36 66</a>
-      <div class="social">
-        <a href="https://www.instagram.com/stankiewiczdesign">Instagram</a>
-        <a href="https://www.facebook.com/profile.php?id=61581186960442">Facebook</a>
-        <a href="https://www.tiktok.com/@stankiewiczdesign">TikTok</a>
-        <a href="https://www.pinterest.com/StankiewiczDesign/">Pinterest</a>
+      <div class="details">
+        <div><span class="label">{t['email']}</span><div class="mail"><a id="mail" href="mailto:studio@stankiewicz.design">studio@stankiewicz.design</a><button type="button" id="copy">{t['copy']}</button></div></div>
+        <div><span class="label">{t['phone']}</span><a href="tel:+31639283666">+31 6 39 28 36 66</a></div>
+        <div><span class="label">{t['studio']}</span><span>{e(t['city'])}</span></div>
       </div>
     </div>
     <form id="form" action="{asset('kontakt.php', here)}" method="POST">
       <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="field"><label class="label" for="f-name">{t['f_name']}</label><input id="f-name" name="name" autocomplete="name" required></div>
-      <div class="field"><label class="label" for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
-      <div class="field"><label class="label" for="f-type">{t['f_type']}</label>
-        <select id="f-type" name="type">{opts}</select></div>
-      <div class="field"><label class="label" for="f-msg">{t['f_msg']}</label><textarea id="f-msg" name="message" required></textarea></div>
-      <button class="btn solid" type="submit" id="send">{t['f_send']}</button>
-      <p class="note" id="form-note" aria-live="polite"></p>
+      <div class="pair">
+        <div class="field"><label for="f-name">{t['f_name']}</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-mail">{t['f_mail']}</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="field"><label for="f-type">{t['f_type']}</label><select id="f-type" name="type">{opts}</select></div>
+      <div class="field"><label for="f-msg">{t['f_msg']}</label><textarea id="f-msg" name="message" required></textarea></div>
+      <div class="send"><button class="btn solid" type="submit" id="send">{t['f_send']}</button><p class="note" id="form-note" role="status" aria-live="polite"></p></div>
     </form>
   </div>
 </section>
@@ -383,110 +376,59 @@ def contact_section(lang, here, selected=0):
 def home(lang):
     here, t = PATHS["home"][lang], T[lang]
     title, desc = PAGE_META["home"][lang]
-    slides = [{"src":"images/hero-01.jpg","name":PROJECTS[0][lang]["name"]}] + [{"src":"images/projects/%s/visual-01.jpg" % p["slug"],"name":p[lang]["name"]} for p in PROJECTS[1:]]
-    principles = "".join(f"<article><h3>{e(a)}</h3><p>{e(b)}</p></article>" for a, b in t["principles"])
     grid = "".join(card(p, lang, here) for p in PROJECTS)
+    offer = "".join(f'<a href="{link(k, lang, here)}"><h3>{e(a)}<span aria-hidden="true">→</span></h3><p>{e(b)}</p></a>' for a, b, k in t["offer"])
+    steps = "".join(f'<li><span class="num">{i+1:02d}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(t["steps"]))
     org = dict(ORG, url=SITE + here)
     return (head(lang, "home", title, desc, here) + jsonld(org) + "</head>\n<body data-root=\"%s\">\n" % asset("", here) + INTRO + nav(lang, "home", here) + f"""
 <header class="hero" id="top">
-  <div class="slides" id="slides" data-slides='{e(json.dumps(slides, ensure_ascii=False))}'>
-    <img class="on" src="{asset('images/hero-01.jpg', here)}" width="1402" height="1122" fetchpriority="high" alt="{e(t['hero_alt'])}">
-  </div>
   <div class="wrap">
-    <h1 class="label">{e(t['hero_label'])}</h1>
-    <p class="slogan">Before it’s built,<br>it’s felt.</p>
-    <p class="sub">{e(t['hero_sub'])}</p>
-    <div class="cta">
-      <a class="btn solid" href="#portfolio">{e(T[lang]['cta_projects'])}</a>
-      <a class="btn" href="#contact">{e(t['cta_contact'])}</a>
+    <div class="hero-text">
+      <p class="label">{e(t['hero_kicker'])}</p>
+      <h1>{e(t['hero_h1'])}</h1>
+      <p class="lead">{e(t['hero_lead'])}</p>
+      <div class="cta"><a class="btn solid" href="#projects">{e(t['cta_projects'])}</a><a class="text-link" href="#contact">{e(t['cta_contact'])}</a></div>
     </div>
+    <div class="hero-img"><img src="{asset('images/hero-01.jpg', here)}" width="1402" height="1122" fetchpriority="high" alt="{e(t['hero_alt'])}"></div>
   </div>
-  <div class="slide-info"><span class="label" id="slide-name">{e(PROJECTS[0][lang]['name'])}</span><div class="dots" id="dots"></div></div>
 </header>
 
-<section id="philosophy">
+<section id="projects">
   <div class="wrap">
-    <div class="head">
-      <p class="label">{t['ph_label']}</p>
-      <h2>{e(t['ph_title'])}</h2>
-    </div>
-    <div class="principles">{principles}</div>
-    <div class="philo">
-      <p>{e(t['ph1'])}</p>
-      <p>{e(t['ph2'])}</p>
-    </div>
-    <blockquote>Atmosphere before decoration.</blockquote>
-  </div>
-</section>
-
-<section id="portfolio">
-  <div class="wrap">
-    <div class="head">
-      <p class="label">Portfolio</p>
-      <h2>{e(t['pf_title'])}</h2>
-    </div>
+    <div class="head"><p class="label">{t['pf_label']}</p><h2>{e(t['pf_h2'])}</h2></div>
     <div class="grid">{grid}</div>
+    <p class="all"><a class="text-link" href="{link('projects', lang, here)}">{e(t['all_projects'])} →</a></p>
   </div>
 </section>
 
 <section id="services">
   <div class="wrap">
-    <div class="head">
-      <p class="label">{t['of_label']}</p>
-      <h2>{e(t['of_title'])}</h2>
-    </div>
-    {rows(t['offer'], numbered=False, links=True, lang=lang, here=here)}
+    <div class="head"><p class="label">{t['of_label']}</p><h2>{e(t['of_h2'])}</h2></div>
+    <div class="offer">{offer}</div>
   </div>
 </section>
 
 <section id="process">
   <div class="wrap">
-    <div class="head">
-      <p class="label">{t['pr_label']}</p>
-      <h2>{e(t['pr_title'])}</h2>
-    </div>
-    {rows(t['steps'])}
+    <div class="head"><p class="label">{t['pr_label']}</p><h2>{e(t['pr_h2'])}</h2></div>
+    <ol class="steps">{steps}</ol>
   </div>
 </section>
 
-<section id="about">
+<section id="studio">
   <div class="wrap about">
-    <img class="portrait" src="{asset('images/portrait.jpg', here)}" width="1000" height="1250" alt="{e(t['portrait_alt'])}" loading="lazy">
     <div>
       <p class="label">{t['ab_label']}</p>
-      <h2>{e(t['ab_title'])}</h2>
+      <h2>{e(t['ab_h2'])}</h2>
       <p>{e(t['ab1'])}</p>
-      <p class="where">{e(t['ab2'])}</p>
+      <p>{e(t['ab2'])}</p>
     </div>
+    <img src="{asset('images/portrait.jpg', here)}" width="1000" height="1250" alt="{e(t['portrait_alt'])}" loading="lazy">
   </div>
 </section>
 
-<section id="instagram">
-  <div class="wrap">
-    <div class="head"><div><p class="label">Instagram</p></div><h2>{e(t['ig_title'])}</h2></div>
-    <div class="ig" id="ig"></div>
-    <a class="btn ig-more" href="https://www.instagram.com/stankiewiczdesign" target="_blank" rel="noopener">{e(t['ig_more'])}</a>
-  </div>
-</section>
+""" + contact_section(lang, here) + footer(lang, "home", here) + page_end(here))
 
-""" + contact_section(lang, here) + f"""
-<section id="newsletter">
-  <div class="wrap news">
-    <div>
-      <p class="label">Newsletter</p>
-      <h2>{e(t['nl_title'])}</h2>
-      <p class="lead">{e(t['nl_lead'])}</p>
-    </div>
-    <form id="nl" action="{asset('newsletter.php', here)}" method="POST">
-      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="row2"><label class="hp" for="nl-mail">E-mail</label><input id="nl-mail" name="email" type="email" autocomplete="email" placeholder="you@email.com" required><button class="btn solid" type="submit" id="nl-send">{e(t['nl_send'])}</button></div>
-      <label class="consent"><input type="checkbox" name="consent" value="1" required><span>{e(t['nl_consent'])}</span></label>
-      <p class="note" id="nl-note" aria-live="polite"></p>
-    </form>
-  </div>
-</section>
-
-""" + footer(lang, here) + page_end(here))
 
 def crumb_html(lang, here, trail):
     parts = [f'<a href="{link("home", lang, here)}">{e(T[lang]["home_crumb"])}</a>']
@@ -504,7 +446,7 @@ def projects_page(lang):
     title, desc = PAGE_META["projects"][lang]
     name = dict(t["nav"])["projects"]
     trail = [(key, name)]
-    grid = "".join(card(p, lang, here) for p in PROJECTS)
+    grid = "".join(card(p, lang, here, short=True) for p in PROJECTS)
     return (head(lang, key, title, desc, here) + crumb_ld(lang, trail) + f'</head>\n<body data-root="{asset("", here)}">\n' + nav(lang, key, here) + f"""
 <header class="page-hero" id="top"><div class="wrap">
   {crumb_html(lang, here, trail)}
@@ -512,7 +454,7 @@ def projects_page(lang):
   <p class="lead">{e(t['pf_title'])}</p>
 </div></header>
 <section style="border-top:0;padding-top:0"><div class="wrap"><div class="grid">{grid}</div></div></section>
-""" + contact_section(lang, here) + footer(lang, here) + page_end(here))
+""" + contact_section(lang, here) + footer(lang, key, here) + page_end(here))
 
 def project_page(lang, i):
     p = PROJECTS[i]; t = p[lang]; u = T[lang]
@@ -524,26 +466,26 @@ def project_page(lang, i):
     gallery = "".join(f'<img src="{img(k)}" alt="{e(t["name"])}, {u["view"]} {k}" loading="lazy" width="1402" height="1122">' for k in range(2, p["n"] + 1))
     mw, mh = img_size(f"images/projects/{p['slug']}/moodboard.jpg")
     gallery += f'<img class="wide" src="{asset("images/projects/%s/moodboard.jpg" % p["slug"], here)}" alt="Moodboard: {e(t["name"])}" loading="lazy" width="{mw}" height="{mh}">'
-    chips = lambda xs: "".join(f"<span>{e(x)}</span>" for x in xs)
-    case_html = "".join(f'<section><div class="wrap head" style="margin-bottom:0"><h2 class="label">{e(h)}</h2><div class="prose"><p>{e(x)}</p></div></div></section>\n' for h, x in zip(HEADINGS[lang], CASES[p["slug"]][lang]))
+    chips = lambda xs: e(" · ".join(xs))
+    case_html = '<section class="case"><div class="wrap">' + "".join(f'<div class="head"><h2 class="label">{e(h)}</h2><div class="prose"><p>{e(x)}</p></div></div>' for h, x in zip(HEADINGS[lang], CASES[p["slug"]][lang])) + "</div></section>\n"
     prev, nxt = PROJECTS[i - 1], PROJECTS[(i + 1) % len(PROJECTS)]
     svc = "interior" if i != 1 else "viz"
-    svc_name = dict(u["nav"])[svc]
+    svc_name = u["svc"][svc]
     ld = {"@context":"https://schema.org","@type":"CreativeWork","name":t["name"],"genre":t["type"],"description":t["long"],"image":SITE+f"images/projects/{p['slug']}/visual-01.jpg","inLanguage":lang,"creator":{"@type":"Organization","name":"Stankiewicz Design","url":SITE}}
     return (head(lang, key, title, desc, here, img=f"images/projects/{p['slug']}/visual-01.jpg") + jsonld(ld) + crumb_ld(lang, trail) + f'</head>\n<body data-root="{asset("", here)}">\n' + nav(lang, key, here) + f"""
 <header class="page-hero" id="top"><div class="wrap">
   {crumb_html(lang, here, trail)}
-  <p class="label" style="margin-top:28px">{e(t['type'])}</p>
+  <p class="label">{e(t['type'])}</p>
   <h1>{e(t['name'])}</h1>
   <p class="lead">{e(t['short'])}</p>
 </div></header>
 <div class="wrap cover-wrap"><img class="cover" src="{img(1)}" width="1402" height="1122" fetchpriority="high" alt="{e(t['name'])}: {e(t['short'])}"></div>
 <section><div class="wrap two">
   <div class="prose"><p>{e(t['long'])}</p></div>
-  <div class="meta" style="grid-template-columns:1fr">
-    <div><span class="label">{u['mat']}</span><div class="chips">{chips(t['mat'])}</div></div>
-    <div><span class="label">{u['mood']}</span><div class="chips">{chips(t['mood'])}</div></div>
-    <div><span class="label">{u['service_of']}</span><p style="margin-top:10px"><a href="{link(svc, lang, here)}">{e(svc_name)} →</a></p></div>
+  <div class="meta">
+    <div><span class="label">{u['mat']}</span><p>{chips(t['mat'])}</p></div>
+    <div><span class="label">{u['mood']}</span><p>{chips(t['mood'])}</p></div>
+    <div><span class="label">{u['service_of']}</span><p><a href="{link(svc, lang, here)}">{e(svc_name)} →</a></p></div>
   </div>
 </div></section>
 {case_html}<section><div class="wrap">
@@ -554,7 +496,7 @@ def project_page(lang, i):
   <a href="{link('p:'+prev['slug'], lang, here)}"><span class="label">← {u['prev']}</span><h3>{e(prev[lang]['name'])}</h3></a>
   <a class="next" href="{link('p:'+nxt['slug'], lang, here)}"><span class="label">{u['next']} →</span><h3>{e(nxt[lang]['name'])}</h3></a>
 </div></section>
-""" + contact_section(lang, here) + footer(lang, here) + page_end(here))
+""" + contact_section(lang, here) + footer(lang, key, here) + page_end(here))
 
 def service_page(lang, key):
     s = SERVICES[key]; c = s[lang]; u = T[lang]; here = PATHS[key][lang]
@@ -574,18 +516,18 @@ def service_page(lang, key):
     return (head(lang, key, c["title"], c["desc"], here, img=s["img"]) + jsonld(ld) + crumb_ld(lang, trail) + f'</head>\n<body data-root="{asset("", here)}">\n' + nav(lang, key, here) + f"""
 <header class="page-hero" id="top"><div class="wrap">
   {crumb_html(lang, here, trail)}
-  <p class="label" style="margin-top:28px">{e(c['label'])}</p>
+  <p class="label">{e(c['label'])}</p>
   <h1>{e(c['h1'])}</h1>
   <p class="lead">{e(c['lead'])}</p>
-  <div class="cta"><a class="btn solid" href="#contact">{e(u['cta_discuss'])}</a><a class="btn" href="{link('projects', lang, here)}">{e(u['cta_projects'])}</a></div>
+  <div class="cta"><a class="btn solid" href="#contact">{e(u['cta_discuss'])}</a><a class="text-link" href="{link('projects', lang, here)}">{e(u['cta_projects'])}</a></div>
 </div></header>
 <div class="wrap cover-wrap"><img class="cover" src="{asset(s['img'], here)}" width="1402" height="1122" fetchpriority="high" alt="{e(c['alt'])}"></div>
 """ + "\n".join(blocks) + f"""
 <section><div class="wrap">
-  <div class="head"><p class="label">{e(u['related'])}</p><div></div></div>
+  <div class="head"><h2 class="label">{e(u['related'])}</h2><div></div></div>
   <div class="grid">{grid}</div>
 </div></section>
-""" + contact_section(lang, here, 1 if key == "viz" else 0) + footer(lang, here) + page_end(here))
+""" + contact_section(lang, here, 1 if key == "viz" else 0) + footer(lang, key, here) + page_end(here))
 
 # ---------------------------------------------------------------- write
 def build(out):
