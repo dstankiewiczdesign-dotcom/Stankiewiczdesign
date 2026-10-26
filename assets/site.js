@@ -62,6 +62,10 @@ if(ig)(async()=>{
   }
 })();
 
+/* hero video: still frame only for people who ask for less motion */
+const hv=document.getElementById("hero-video");
+if(hv&&matchMedia("(prefers-reduced-motion: reduce)").matches){hv.removeAttribute("autoplay");hv.pause()}
+
 /* hero slideshow: one frame per project, crossfade every 6 s; extra frames load after the page */
 const box=document.getElementById("slides");
 if(box){

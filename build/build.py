@@ -67,6 +67,7 @@ T = {
   ab1="Stankiewicz Design is an author-led interior design and 3D visualization studio focused on atmospheric, mood-led spaces. I create interiors that are not only seen, but felt before they are built. My work is based on light, material, proportion, silence and cinematic composition.",
   ab2="Based in Nijmegen, working with clients across Europe and worldwide.",
   portrait_alt="Damian Stankiewicz, interior designer",
+  hero_video="Walk through a concrete living room with a view of the mountains",
   hero_alt="Apartment interior with concrete and a black volume in directional light",
   ig_title="Latest frames from the studio.", ig_more="Follow @stankiewiczdesign",
   ct_label="Contact", ct_title="Describe the space you have in mind.",
@@ -97,6 +98,7 @@ T = {
   ab1="Stankiewicz Design to autorskie studio projektowania wnętrz i wizualizacji 3D. Tworzę przestrzenie, które mają nie tylko dobrze wyglądać, ale budować nastrój, napięcie i emocjonalny odbiór. W mojej pracy najważniejsze są światło, materiał, proporcje, cisza i kompozycja.",
   ab2="Nijmegen. Pracuję z klientami z całej Europy i świata.",
   portrait_alt="Damian Stankiewicz, projektant wnętrz",
+  hero_video="Przejście przez betonowy salon z widokiem na góry",
   hero_alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle",
   ig_title="Najnowsze kadry z pracowni.", ig_more="Obserwuj @stankiewiczdesign",
   ct_label="Kontakt", ct_title="Opisz przestrzeń, którą masz w głowie.",
@@ -383,15 +385,16 @@ def contact_section(lang, here, selected=0):
 def home(lang):
     here, t = PATHS["home"][lang], T[lang]
     title, desc = PAGE_META["home"][lang]
-    slides = [{"src":"images/hero-01.jpg","name":PROJECTS[0][lang]["name"]}] + [{"src":"images/projects/%s/visual-01.jpg" % p["slug"],"name":p[lang]["name"]} for p in PROJECTS[1:]]
     principles = "".join(f"<article><h3>{e(a)}</h3><p>{e(b)}</p></article>" for a, b in t["principles"])
     grid = "".join(card(p, lang, here) for p in PROJECTS)
     org = dict(ORG, url=SITE + here)
     return (head(lang, "home", title, desc, here) + jsonld(org) + "</head>\n<body data-root=\"%s\">\n" % asset("", here) + INTRO + nav(lang, "home", here) + f"""
 <header class="hero" id="top">
-  <div class="slides" id="slides" data-slides='{e(json.dumps(slides, ensure_ascii=False))}'>
-    <img class="on" src="{asset('images/hero-01.jpg', here)}" width="1402" height="1122" fetchpriority="high" alt="{e(t['hero_alt'])}">
-  </div>
+  <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="{asset('images/hero-video-poster.jpg', here)}" aria-label="{e(t['hero_video'])}">
+    <source src="{asset('video/hero-mobile.mp4', here)}" type="video/mp4" media="(max-width: 720px)">
+    <source src="{asset('video/hero.mp4', here)}" type="video/mp4">
+    <source src="{asset('video/hero.webm', here)}" type="video/webm">
+  </video>
   <div class="wrap">
     <h1 class="label">{e(t['hero_label'])}</h1>
     <p class="slogan">Before it’s built,<br>it’s felt.</p>
@@ -401,7 +404,6 @@ def home(lang):
       <a class="btn" href="#contact">{e(t['cta_contact'])}</a>
     </div>
   </div>
-  <div class="slide-info"><span class="label" id="slide-name">{e(PROJECTS[0][lang]['name'])}</span><div class="dots" id="dots"></div></div>
 </header>
 
 <section id="philosophy">

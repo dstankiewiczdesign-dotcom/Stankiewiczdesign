@@ -81,9 +81,11 @@
 </nav>
 
 <header class="hero" id="top">
-  <div class="slides" id="slides" data-slides='[{&quot;src&quot;: &quot;images/hero-01.jpg&quot;, &quot;name&quot;: &quot;Apartament 01&quot;}, {&quot;src&quot;: &quot;images/projects/blue-kitchen/visual-01.jpg&quot;, &quot;name&quot;: &quot;Niebieska kuchnia&quot;}, {&quot;src&quot;: &quot;images/projects/marble-kitchen/visual-01.jpg&quot;, &quot;name&quot;: &quot;Kuchnia marmurowa&quot;}, {&quot;src&quot;: &quot;images/projects/marble-bathroom/visual-01.jpg&quot;, &quot;name&quot;: &quot;Łazienka marmurowa&quot;}]'>
-    <img class="on" src="../images/hero-01.jpg" width="1402" height="1122" fetchpriority="high" alt="Wnętrze apartamentu z betonem i czarną bryłą w kierunkowym świetle">
-  </div>
+  <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="../images/hero-video-poster.jpg" aria-label="Przejście przez betonowy salon z widokiem na góry">
+    <source src="../video/hero-mobile.mp4" type="video/mp4" media="(max-width: 720px)">
+    <source src="../video/hero.mp4" type="video/mp4">
+    <source src="../video/hero.webm" type="video/webm">
+  </video>
   <div class="wrap">
     <h1 class="label">Projektowanie wnętrz · Wizualizacje 3D · Europa i świat</h1>
     <p class="slogan">Before it’s built,<br>it’s felt.</p>
@@ -93,7 +95,6 @@
       <a class="btn" href="#contact">Opisz swoją przestrzeń</a>
     </div>
   </div>
-  <div class="slide-info"><span class="label" id="slide-name">Apartament 01</span><div class="dots" id="dots"></div></div>
 </header>
 
 <section id="philosophy">
